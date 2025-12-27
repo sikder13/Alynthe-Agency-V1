@@ -9,6 +9,9 @@ import Services from "@/pages/Services";
 import UseCases from "@/pages/UseCases";
 import About from "@/pages/About";
 import Contact from "@/pages/Contact";
+import BlogIndex from "@/pages/blog/Index";
+import AgencyDead from "@/pages/blog/AgencyDead";
+import SalesEngineBlueprint from "@/pages/blog/SalesEngineBlueprint";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -19,6 +22,9 @@ function Router() {
       <Route path="/use-cases" component={UseCases} />
       <Route path="/about" component={About} />
       <Route path="/contact" component={Contact} />
+      <Route path="/blog" component={BlogIndex} />
+      <Route path="/blog/agency-dead" component={AgencyDead} />
+      <Route path="/blog/sales-engine-blueprint" component={SalesEngineBlueprint} />
       <Route component={NotFound} />
     </Switch>
   );
