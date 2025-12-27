@@ -3,9 +3,9 @@ import { ArrowRight } from "lucide-react";
 import { Link } from "wouter";
 
 const pillars = [
-  { id: "01", title: "Experience Design", desc: "User-centric interfaces that convert." },
-  { id: "02", title: "Growth Engines", desc: "Automated marketing & sales pipelines." },
-  { id: "03", title: "Intelligent Systems", desc: "AI-driven operational workflows." }
+  { id: "01", title: "Experience Design", desc: "User-centric interfaces that convert.", hash: "design" },
+  { id: "02", title: "Growth Engines", desc: "Automated marketing & sales pipelines.", hash: "growth" },
+  { id: "03", title: "Intelligent Systems", desc: "AI-driven operational workflows.", hash: "systems" }
 ];
 
 export function ServicePillars() {
@@ -14,7 +14,7 @@ export function ServicePillars() {
       <div className="container mx-auto px-6 md:px-12">
         <div className="flex flex-col">
           {pillars.map((pillar, index) => (
-            <Link key={pillar.id} href="/services">
+            <Link key={pillar.id} href={`/services#${pillar.hash}`}>
               <motion.div 
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}

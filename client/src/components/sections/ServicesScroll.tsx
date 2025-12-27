@@ -5,6 +5,7 @@ import { Activity, ArrowUpRight } from "lucide-react";
 const services = [
   {
     id: 0,
+    hash: "design",
     title: "01 Experience Design",
     description: "We craft user-centric interfaces that convert. Beyond aesthetics, we design for behavior, ensuring every interaction drives the user towards a meaningful goal.",
     details: [
@@ -16,6 +17,7 @@ const services = [
   },
   {
     id: 1,
+    hash: "growth",
     title: "02 Growth Engines",
     description: "Automated pipelines that scale. We integrate CRM, marketing automation, and analytics to create a self-sustaining engine for revenue growth.",
     details: [
@@ -27,6 +29,7 @@ const services = [
   },
   {
     id: 2,
+    hash: "systems",
     title: "03 Intelligent Systems",
     description: "Future-proof your operations with custom AI agents and robust backend logic. We build the hidden machinery that powers your business efficiency.",
     details: [
@@ -165,7 +168,8 @@ function VisualCard({ id }: { id: number }) {
 
 function ScrollCard({ service, setActive, index }: { service: typeof services[0], setActive: (id: number) => void, index: number }) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { margin: "-50% 0px -50% 0px", amount: 0.5 });
+  // Increased threshold to 0.6 as requested for more reliable triggering
+  const isInView = useInView(ref, { margin: "-50% 0px -50% 0px", amount: 0.6 });
 
   useEffect(() => {
     if (isInView) {
@@ -176,13 +180,14 @@ function ScrollCard({ service, setActive, index }: { service: typeof services[0]
   return (
     <motion.div
       ref={ref}
+      id={service.hash} // Added ID for hash scrolling
       className="min-h-[90vh] flex items-center justify-center p-6 md:p-8"
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-10%" }}
       transition={{ duration: 0.8 }}
     >
-      <div className="bg-white p-8 md:p-12 rounded-3xl shadow-sm border border-gray-100 w-full max-w-xl flex flex-col gap-8">
+      <div className="bg-white/80 backdrop-blur-md p-8 md:p-12 rounded-3xl shadow-sm border border-white/50 w-full max-w-xl flex flex-col gap-8">
         <h3 className="text-2xl font-light text-gray-900 md:hidden">{service.title}</h3>
         
         {/* Visual Asset */}
@@ -209,13 +214,28 @@ function ScrollCard({ service, setActive, index }: { service: typeof services[0]
 export function ServicesScroll() {
   const [activeId, setActiveId] = useState(0);
 
+  // Auto-scroll to hash on mount
+  useEffect(() => {
+    if (window.location.hash) {
+      const id = window.location.hash.replace("#", "");
+      const element = document.getElementById(id);
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
+    }
+  }, []);
+
   return (
-    <section className="bg-neutral-50 relative">
+    // Ensuring items-start is set on parent for sticky behavior
+    <section className="relative bg-transparent">
       <div className="container mx-auto px-6 md:px-12">
-        <div className="flex flex-col lg:flex-row">
+        <div className="flex flex-col lg:flex-row items-start"> 
           
           {/* Left Column - Sticky */}
-          <div className="hidden lg:flex lg:w-1/2 h-screen sticky top-0 flex-col justify-center pr-20">
+          {/* Added h-fit and top-[20%] as requested */}
+          <div className="hidden lg:flex lg:w-1/2 sticky top-[20%] h-fit flex-col justify-center pr-20">
             <div className="relative h-64 w-full"> 
               {services.map((service, index) => (
                 <motion.div
