@@ -69,9 +69,9 @@ export function Impact() {
               </span>
             </div>
             <div className="bg-white p-12 flex flex-col gap-2 aspect-square justify-center hover:bg-blue-50/30 transition-colors">
-              <span className="text-gray-500 text-sm font-medium">Years in business</span>
+              <span className="text-gray-500 text-sm font-medium">Annual Hours Saved</span>
               <span className="text-5xl md:text-6xl font-light text-gray-900">
-                <Counter from={0} to={7} />
+                <Counter from={0} to={12000} suffix="+" />
               </span>
             </div>
           </div>
