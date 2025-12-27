@@ -2,28 +2,29 @@ import { motion } from "framer-motion";
 import { 
   Phone, Bot, CalendarCheck, 
   ShoppingBag, Mail, DollarSign,
-  Database, Server, Network, Layers, ArrowRight
+  Database, Server, Network, Layers, ArrowRight,
+  Globe, Zap, User
 } from "lucide-react";
 
 type UseCase = {
   id: string;
   tag: string;
-  challenge: string;
-  fix: string;
+  hook: string;
   metric: string;
   visual: React.ReactNode;
 };
 
-function UseCaseCard({ useCase }: { useCase: UseCase }) {
+function UseCaseCard({ useCase, index }: { useCase: UseCase, index: number }) {
   return (
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      className="group bg-white border border-gray-100 rounded-3xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
+      transition={{ delay: index * 0.1, duration: 0.6 }}
+      className="group bg-white/50 backdrop-blur-md border border-white/60 rounded-3xl overflow-hidden shadow-sm hover:shadow-lg hover:scale-[1.02] transition-all duration-300"
     >
       {/* Visual Top - Scenario Diagram */}
-      <div className="bg-neutral-50 p-8 md:p-12 min-h-[280px] flex items-center justify-center border-b border-gray-100 relative overflow-hidden">
+      <div className="bg-neutral-50/50 p-8 md:p-12 min-h-[280px] flex items-center justify-center border-b border-white/60 relative overflow-hidden">
         {/* Subtle grid pattern */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
         <div className="relative z-10 w-full flex items-center justify-center">
@@ -38,23 +39,18 @@ function UseCaseCard({ useCase }: { useCase: UseCase }) {
             {useCase.tag}
           </span>
           <div className="space-y-2">
-            <div className="flex gap-2 items-start">
-              <span className="text-red-500 font-medium text-xs uppercase tracking-wide mt-1">Challenge</span>
-              <p className="text-gray-500 font-light leading-relaxed">{useCase.challenge}</p>
-            </div>
-            <div className="flex gap-2 items-start">
-              <span className="text-blue-600 font-medium text-xs uppercase tracking-wide mt-1">Fix</span>
-              <p className="text-gray-900 font-medium leading-relaxed">{useCase.fix}</p>
-            </div>
+            <p className="text-xl text-gray-900 font-light leading-relaxed">
+              {useCase.hook}
+            </p>
           </div>
         </div>
         
-        <div className="pt-6 border-t border-gray-100 flex items-center justify-between">
+        <div className="pt-6 border-t border-gray-100/50 flex items-center justify-between">
           <div>
             <span className="block text-xs text-gray-400 font-medium uppercase tracking-wider mb-1">Impact</span>
             <span className="text-3xl font-light text-gray-900 tracking-tight">{useCase.metric}</span>
           </div>
-          <div className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-black group-hover:text-white transition-colors">
+          <div className="w-10 h-10 rounded-full bg-white/80 flex items-center justify-center group-hover:bg-black group-hover:text-white transition-colors shadow-sm">
             <ArrowRight className="w-4 h-4" />
           </div>
         </div>
@@ -151,4 +147,29 @@ const VisualScenario3 = () => (
   </div>
 );
 
-export { UseCaseCard, VisualScenario1, VisualScenario2, VisualScenario3 };
+const VisualScenario4 = () => (
+  <div className="flex items-center gap-4 md:gap-8">
+    <div className="flex flex-col items-center gap-2">
+      <div className="w-16 h-16 rounded-2xl bg-white border border-gray-200 flex items-center justify-center shadow-sm">
+        <Globe className="w-6 h-6 text-gray-400" />
+      </div>
+      <span className="text-xs text-gray-400 font-medium">Browser</span>
+    </div>
+    <ArrowRight className="w-5 h-5 text-gray-300" />
+    <div className="flex flex-col items-center gap-2">
+      <div className="w-16 h-16 rounded-2xl bg-yellow-50 border border-yellow-100 flex items-center justify-center">
+        <Zap className="w-8 h-8 text-yellow-500 fill-yellow-500" />
+      </div>
+      <span className="text-xs text-yellow-600 font-bold">Speed</span>
+    </div>
+    <ArrowRight className="w-5 h-5 text-gray-300" />
+    <div className="flex flex-col items-center gap-2">
+      <div className="w-16 h-16 rounded-2xl bg-white border border-gray-200 flex items-center justify-center shadow-sm">
+        <User className="w-6 h-6 text-gray-900" />
+      </div>
+      <span className="text-xs text-gray-900 font-medium">User</span>
+    </div>
+  </div>
+);
+
+export { UseCaseCard, VisualScenario1, VisualScenario2, VisualScenario3, VisualScenario4 };
