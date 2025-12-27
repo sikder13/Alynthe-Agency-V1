@@ -4,6 +4,32 @@ import { storage } from "./storage";
 import { insertLeadSchema } from "@shared/schema";
 import { fromError } from "zod-validation-error";
 import OpenAI from "openai";
+import { Resend } from "resend";
+
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+async function sendWelcomeEmail(name: string, email: string) {
+  try {
+    await resend.emails.send({
+      from: "Alynthe <onboarding@resend.dev>",
+      to: email,
+      subject: "Transmission Received: Alynthe Inquiry",
+      text: `Hello ${name},
+
+Your inquiry has been logged in our system.
+
+You are currently speaking with Sarah, our AI Associate. If you disconnect or require higher-level architectural guidance, a human partner from our Indianapolis operations team will review your brief and contact you shortly.
+
+No further action is required at this moment.
+
+Regards,
+The Alynthe Team`
+    });
+    console.log(`Welcome email sent to ${email}`);
+  } catch (error) {
+    console.error("Failed to send welcome email:", error);
+  }
+}
 
 const openai = new OpenAI({
   apiKey: process.env.AI_INTEGRATIONS_OPENAI_API_KEY,
@@ -88,6 +114,9 @@ export async function registerRoutes(
     try {
       const validated = insertLeadSchema.parse(req.body);
       const lead = await storage.createLead(validated);
+      
+      // Send welcome email asynchronously (don't block the response)
+      sendWelcomeEmail(validated.name, validated.email);
       
       res.status(201).json({
         success: true,
