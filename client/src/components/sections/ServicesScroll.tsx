@@ -168,7 +168,6 @@ function VisualCard({ id }: { id: number }) {
 
 function ScrollCard({ service, setActive, index }: { service: typeof services[0], setActive: (id: number) => void, index: number }) {
   const ref = useRef(null);
-  // Use margin -50% to trigger when the element is in the middle of the viewport
   const isInView = useInView(ref, { margin: "-50% 0px -50% 0px" });
 
   useEffect(() => {
@@ -180,8 +179,8 @@ function ScrollCard({ service, setActive, index }: { service: typeof services[0]
   return (
     <div
       ref={ref}
-      id={service.hash} // Explicit ID for hash scrolling
-      className="min-h-[80vh] flex items-center justify-center py-12"
+      id={service.hash}
+      className="lg:min-h-[80vh] flex items-center justify-center lg:py-12"
     >
       <motion.div
         initial={{ opacity: 0, y: 50 }}
@@ -190,14 +189,15 @@ function ScrollCard({ service, setActive, index }: { service: typeof services[0]
         transition={{ duration: 0.8 }}
         className="bg-white/80 backdrop-blur-md p-8 md:p-12 rounded-3xl shadow-sm border border-white/50 w-full max-w-xl flex flex-col gap-8"
       >
-        <h3 className="text-2xl font-light text-gray-900 md:hidden">{service.title}</h3>
+        <div className="lg:hidden">
+          <h3 className="text-2xl font-light text-gray-900 mb-2">{service.title}</h3>
+          <p className="text-gray-500 font-light text-sm leading-relaxed">{service.description}</p>
+        </div>
         
-        {/* Visual Asset */}
         <div className="w-full">
            <VisualCard id={service.id} />
         </div>
 
-        {/* Details List */}
         <ul className="space-y-4">
           {service.details.map((detail, idx) => (
             <li key={idx} className="flex items-center gap-3 text-gray-600 font-light text-base md:text-lg">
@@ -262,8 +262,8 @@ export function ServicesScroll() {
             </div>
           </div>
 
-          {/* Right Column - Scroll */}
-          <div className="w-full pb-24">
+          {/* Right Column - Vertical on mobile, scroll on desktop */}
+          <div className="w-full pb-24 flex flex-col gap-8 lg:gap-0 lg:block">
             {services.map((service, index) => (
               <ScrollCard 
                 key={service.id} 
