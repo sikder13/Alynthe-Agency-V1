@@ -188,7 +188,7 @@ export default function About() {
                   <h3 className="text-2xl font-bold text-gray-900">Udaay Sikder</h3>
                   <p className="text-xs uppercase tracking-widest text-neutral-500 font-semibold">FOUNDER & AI CONSULTANT</p>
                   <p className="text-gray-600 font-light leading-relaxed mt-4 max-w-sm">
-                    The engineer. He architects the intelligent agents and logic flows that power our automation, turning data into action.
+                    The Architect. Udaay doesn't just write code; he engineers conversion. A specialist in AI-driven marketing ecosystems, he fuses deep neural networks with high-level digital strategy to build campaigns that don't just reach audiences—they predict them.
                   </p>
                 </div>
               </motion.div>
