@@ -18,15 +18,17 @@ export default function Footer() {
           {/* Brand Column */}
           <div className="md:col-span-4 flex flex-col justify-between h-full min-h-[160px]">
             <div>
-              <div className="flex items-center gap-3 mb-8">
-                <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 border-[1.5px] border-black bg-white">
-                    <path d="M20 0V40" stroke="black" strokeWidth="1.5"/>
-                    <path d="M0 20H40" stroke="black" strokeWidth="1.5"/>
-                    <path d="M0 0L40 40" stroke="black" strokeWidth="1.5"/>
-                    <path d="M40 0L0 40" stroke="black" strokeWidth="1.5"/>
-                </svg>
-                <span className="font-light tracking-tight text-lg text-black">ALYNTHE</span>
-              </div>
+              <Link href="/">
+                <a className="flex items-center gap-3 mb-8 cursor-pointer group hover:opacity-80 transition-opacity">
+                  <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 border-[1.5px] border-black bg-white">
+                      <path d="M20 0V40" stroke="black" strokeWidth="1.5"/>
+                      <path d="M0 20H40" stroke="black" strokeWidth="1.5"/>
+                      <path d="M0 0L40 40" stroke="black" strokeWidth="1.5"/>
+                      <path d="M40 0L0 40" stroke="black" strokeWidth="1.5"/>
+                  </svg>
+                  <span className="font-light tracking-tight text-lg text-black">ALYNTHE</span>
+                </a>
+              </Link>
             </div>
             <p className="text-sm text-gray-400 font-light">
               © 2026 Alynthe LLC. All rights reserved.
