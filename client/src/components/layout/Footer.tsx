@@ -1,7 +1,16 @@
 import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 
 export default function Footer() {
+  const [location] = useLocation();
+
+  const handleScrollTop = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (location === href) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
   const links = [
     { name: "About", href: "/about" },
     { name: "Services", href: "/services" },
@@ -19,7 +28,10 @@ export default function Footer() {
           <div className="md:col-span-4 flex flex-col justify-between h-full min-h-[160px]">
             <div>
               <Link href="/">
-                <a className="flex items-center gap-3 mb-8 cursor-pointer group hover:opacity-80 transition-opacity">
+                <a 
+                  className="flex items-center gap-3 mb-8 cursor-pointer group hover:opacity-80 transition-opacity"
+                  onClick={(e) => handleScrollTop(e, "/")}
+                >
                   <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 border-[1.5px] border-black bg-white">
                       <path d="M20 0V40" stroke="black" strokeWidth="1.5"/>
                       <path d="M0 20H40" stroke="black" strokeWidth="1.5"/>
