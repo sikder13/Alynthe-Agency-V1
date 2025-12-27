@@ -1,0 +1,109 @@
+Role: Senior Frontend Engineer (Awwwards/Agency Standard). Task: Build the FINAL production Homepage for "Alynthe" (Digital Growth Consultancy). Tech Stack: Next.js 14, Tailwind CSS, Framer Motion, Lucide-React.
+
+═══════════════════════════════════════════ 1. THE DESIGN SYSTEM (Light Mode) ═══════════════════════════════════════════
+
+Theme: "Paper White" (#FFFFFF to #FAFAFA).
+
+Typography: 'Inter' (Google Fonts). Headings are font-light and tight tracking.
+
+Accent: #2563EB (International Blue).
+
+Borders: Ultra-thin, crisp borders (border-gray-200).
+
+Animations: All numbers must count up. All elements fade in on scroll.
+
+═══════════════════════════════════════════ 2. THE NAVBAR (Functional) ═══════════════════════════════════════════
+
+Logo (Left): Render an SVG: A square stroke containing a cross (+) and diagonal lines (X) meeting in the center (Union Jack geometry in a box). Text: "ALYNTHE".
+
+Center Links: Display direct text links (No "Menu" button):
+
+About, Services, Projects, Blog, Contact.
+
+Right CTA:
+
+Text: "Free Consultation Call"
+
+Icon: Phone handset.
+
+Action: href="tel:+19293508374"
+
+Style: Solid Black background, White text, rounded pill shape.
+
+═══════════════════════════════════════════ 3. HERO SECTION (Alive & Breathing) ═══════════════════════════════════════════
+
+Headline: "The Infrastructure of Growth." (Massive, Centered).
+
+Subhead: "We automate chaos. We scale revenue."
+
+Background Animation: Use a Mesh Gradient (Blue/Purple/White) that slowly morphs and rotates behind the text to create a "living" atmosphere.
+
+Interaction: Text fades in + slides up on load.
+
+═══════════════════════════════════════════ 4. SECTIONS & CONTENT ═══════════════════════════════════════════
+
+A. The Service Pillars (Focus List)
+
+Create the 3-row vertical list ("Experience Design", "Growth Engines", "Intelligent Systems") as designed previously.
+
+B. THE IMPACT SECTION (Replica of 'section 1.png')
+
+Layout: Two columns.
+
+Left Side:
+
+Label: "Impact"
+
+Headline: "Numbers that speak for themselves" (Large, Bold).
+
+Text: "We measure what matters..."
+
+Button: "See our work" (Outline style).
+
+Right Side (The Grid): A 2x2 Grid of cards.
+
+Card 1: "Projects completed" -> "180+"
+
+Card 2: "Average client ROI" -> "340%"
+
+Card 3: "Client retention rate" -> "92%"
+
+Card 4: "Years in business" -> "7"
+
+Animation: Use framer-motion to animate the count-up (e.g., 0 to 340) when in view.
+
+C. THE FAQ & CTA (Replica of 'section 2.png')
+
+Top Part: Large Headline "Ready to grow your business?" with 2 buttons: "Get started" (Black) and "Schedule call" (Outline).
+
+Bottom Part: A clean 2-column Grid of FAQs ("How does pricing work?", "Timeline?", etc.).
+
+═══════════════════════════════════════════ 5. GLOBAL COMPONENTS ═══════════════════════════════════════════
+
+A. The Footer
+
+Socials: Add icons for Facebook, Instagram, LinkedIn, and X (Twitter) in the "Connect" column.
+
+Sitemap: Update links to match Navbar (About, Services, Projects, Blog, Contact).
+
+Copyright: "© 2026 Alynthe LLC".
+
+B. Chatbot "Sarah"
+
+Position: Fixed Bottom Right (bottom-6 right-6).
+
+UI: A floating white circle with a subtle avatar/icon.
+
+Label: A small chat bubble saying "Hi, I'm Sarah 👋".
+
+Interaction: Opens a minimal chat window on click.
+
+═══════════════════════════════════════════ 6. TECHNICAL CONSTRAINTS ═══════════════════════════════════════════
+
+Ensure the Logo SVG is crisp (stroke-width 1.5).
+
+Ensure the "Call" button works on mobile.
+
+Use lucide-react for all icons.
+
+Mobile Responsiveness: Stack the Impact Grid and FAQ grid on screens < 768px.
