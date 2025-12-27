@@ -3,11 +3,12 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { Chatbot } from "@/components/ui/Chatbot";
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, ArrowRight } from "lucide-react";
+import { Mail, Phone, MapPin, ArrowRight, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 export default function Contact() {
   const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -23,22 +24,51 @@ export default function Contact() {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
-    
-    toast({
-      title: "Project Initialized",
-      description: "We've received your data. Expect a blueprint shortly.",
-    });
+    setIsSubmitting(true);
 
-    // Reset form
-    setFormData({
-      name: "",
-      email: "",
-      projectType: "",
-      challenge: ""
-    });
+    try {
+      const response = await fetch("/api/leads", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        toast({
+          title: "Transmission Received",
+          description: "We've received your data. Expect a blueprint shortly.",
+        });
+
+        // Reset form
+        setFormData({
+          name: "",
+          email: "",
+          projectType: "",
+          challenge: ""
+        });
+      } else {
+        toast({
+          title: "Transmission Failed",
+          description: data.message || "Something went wrong. Please try again.",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      toast({
+        title: "Connection Error",
+        description: "Unable to reach the server. Please check your connection.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -227,10 +257,20 @@ export default function Contact() {
 
                   <button
                     type="submit"
-                    className="w-full group bg-neutral-900 hover:bg-black text-white text-lg font-medium py-4 px-8 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 hover:shadow-xl transform hover:-translate-y-1"
+                    disabled={isSubmitting}
+                    className="w-full group bg-neutral-900 hover:bg-black text-white text-lg font-medium py-4 px-8 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 hover:shadow-xl transform hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
                   >
-                    <span>INITIALIZE PROJECT</span>
-                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="w-5 h-5 animate-spin" />
+                        <span>TRANSMITTING...</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>INITIALIZE PROJECT</span>
+                        <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                      </>
+                    )}
                   </button>
                 </form>
               </div>
