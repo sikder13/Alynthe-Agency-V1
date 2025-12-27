@@ -84,7 +84,7 @@ export default function UseCases() {
                 Real-World Impact.
               </h1>
               <p className="text-xl md:text-2xl font-light text-gray-500 tracking-wide max-w-2xl">
-                Explore how our architecture solves specific industry bottlenecks.
+                Explore how our team solves specific industry bottlenecks.
               </p>
             </motion.div>
           </section>
