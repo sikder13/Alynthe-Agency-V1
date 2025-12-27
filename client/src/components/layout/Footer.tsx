@@ -35,7 +35,7 @@ export default function Footer() {
 
           {/* Address Column */}
           <div className="md:col-span-3 md:col-start-6 flex flex-col gap-6">
-            <h4 className="text-sm font-semibold text-gray-900 uppercase tracking-widest">Indianapolis</h4>
+            <h4 className="text-sm font-bold text-gray-900">Office Address:</h4>
             <p className="text-base text-gray-500 font-light leading-relaxed">
               1438 Spann Ave,<br />
               Indianapolis, IN 46203,<br />
@@ -45,13 +45,16 @@ export default function Footer() {
 
           {/* Connect Column */}
           <div className="md:col-span-2 md:col-start-9 flex flex-col gap-6">
-            <h4 className="text-sm font-semibold text-gray-900 uppercase tracking-widest">Contact</h4>
-            <div className="flex flex-col gap-2">
-              <a href="mailto:alyntheinfo@gmail.com" className="text-base text-gray-500 hover:text-black transition-colors font-light">
-                alyntheinfo@gmail.com
-              </a>
+            <div className="flex flex-col gap-1">
+              <h4 className="text-sm font-bold text-gray-900">Contact Phone:</h4>
               <a href="tel:+19293508374" className="text-base text-gray-500 hover:text-black transition-colors font-light">
                 +1 929 350 8374
+              </a>
+            </div>
+            <div className="flex flex-col gap-1">
+              <h4 className="text-sm font-bold text-gray-900">Contact Email:</h4>
+              <a href="mailto:alyntheinfo@gmail.com" className="text-base text-gray-500 hover:text-black transition-colors font-light">
+                alyntheinfo@gmail.com
               </a>
             </div>
             <div className="flex gap-3 mt-2">

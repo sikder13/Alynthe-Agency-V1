@@ -3,11 +3,10 @@ import { motion } from "framer-motion";
 export function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 bg-[#FAFAFA]">
-      {/* Aurora Gradient Background */}
+      {/* Moving Mesh Gradient Background */}
       <div className="absolute inset-0 z-0 overflow-hidden">
-        <div className="absolute top-[-10%] left-[-10%] w-[70vw] h-[70vw] bg-[#2563EB] rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob" />
-        <div className="absolute top-[-10%] right-[-10%] w-[70vw] h-[70vw] bg-[#C084FC] rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000" />
-        <div className="absolute -bottom-[20%] left-[20%] w-[70vw] h-[80vw] bg-[#22D3EE] rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000" />
+        <div className="absolute top-[20%] left-[20%] w-[50vw] h-[50vw] bg-[#3B82F6] rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob" />
+        <div className="absolute top-[20%] right-[20%] w-[50vw] h-[50vw] bg-[#A855F7] rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000" />
       </div>
 
       <div className="container mx-auto px-6 relative z-10 text-center">
@@ -35,19 +34,16 @@ export function Hero() {
 
       <style>{`
         @keyframes blob {
-          0% { transform: translate(0px, 0px) scale(1) rotate(0deg); }
-          33% { transform: translate(30px, -50px) scale(1.1) rotate(10deg); }
-          66% { transform: translate(-20px, 20px) scale(0.9) rotate(-5deg); }
-          100% { transform: translate(0px, 0px) scale(1) rotate(0deg); }
+          0% { transform: translate(0px, 0px) scale(1); }
+          33% { transform: translate(30px, -50px) scale(1.1); }
+          66% { transform: translate(-20px, 20px) scale(0.9); }
+          100% { transform: translate(0px, 0px) scale(1); }
         }
         .animate-blob {
-          animation: blob 20s infinite alternate;
+          animation: blob 7s infinite;
         }
         .animation-delay-2000 {
-          animation-delay: 4s;
-        }
-        .animation-delay-4000 {
-          animation-delay: 8s;
+          animation-delay: 2s;
         }
       `}</style>
     </section>
