@@ -1,6 +1,7 @@
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { Chatbot } from "@/components/ui/Chatbot";
+import { AnimatedGradient } from "@/components/ui/AnimatedGradient";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
@@ -13,7 +14,7 @@ const articles = [
     title: "Why 'Full-Service' Agencies Are Dead: The Rise of the Solutions Architect.",
     excerpt: "The old model was 'more people.' The new model is 'better code.' Why hiring a marketing firm for automation problems is costing you 30% of your revenue.",
     href: "/blog/agency-dead",
-    color: "bg-indigo-100"
+    gradientVariant: "purple" as const
   },
   {
     id: "sales-engine-blueprint",
@@ -22,7 +23,7 @@ const articles = [
     title: "Anatomy of a 24/7 Sales Engine: Cloning a Top Performer.",
     excerpt: "We analyzed 5,000 successful sales calls and encoded the persuasion logic into Python. Here is the blueprint.",
     href: "/blog/sales-engine-blueprint",
-    color: "bg-emerald-100"
+    gradientVariant: "teal" as const
   }
 ];
 
@@ -70,23 +71,9 @@ export default function BlogIndex() {
                     transition={{ duration: 0.6, delay: index * 0.1 }}
                     className="flex flex-col h-full"
                   >
-                    {/* Abstract Cover Art */}
-                    <div className={`w-full aspect-[16/9] ${article.color} mb-8 relative overflow-hidden rounded-sm transition-all duration-500 group-hover:shadow-lg`}>
-                        <div className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-500 bg-black" />
-                        
-                        {/* Abstract shapes based on index */}
-                        {index === 0 && (
-                           <div className="absolute top-0 right-0 w-full h-full opacity-50">
-                              <div className="absolute top-[20%] right-[20%] w-[40%] h-[40%] bg-indigo-300 rounded-full blur-3xl mix-blend-multiply" />
-                              <div className="absolute bottom-[20%] left-[20%] w-[40%] h-[40%] bg-blue-300 rounded-full blur-3xl mix-blend-multiply" />
-                           </div>
-                        )}
-                        {index === 1 && (
-                           <div className="absolute top-0 right-0 w-full h-full opacity-50">
-                              <div className="absolute top-[30%] left-[30%] w-[50%] h-[50%] bg-emerald-300 rounded-full blur-3xl mix-blend-multiply" />
-                              <div className="absolute bottom-[10%] right-[10%] w-[30%] h-[30%] bg-teal-300 rounded-full blur-3xl mix-blend-multiply" />
-                           </div>
-                        )}
+                    {/* Animated Mesh Gradient Cover */}
+                    <div className="w-full aspect-[16/9] mb-8 relative overflow-hidden rounded-sm transition-all duration-500 group-hover:shadow-lg group-hover:scale-[1.02]">
+                      <AnimatedGradient variant={article.gradientVariant} />
                     </div>
 
                     {/* Meta */}
