@@ -1,60 +1,55 @@
-import { motion, Variants } from "framer-motion";
-import auroraBg from "@assets/generated_images/subtle_aurora_gradient_background_for_minimalist_website.png";
+import { motion } from "framer-motion";
 
 export function Hero() {
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3,
-      },
-    },
-  };
-
-  const itemVariants: Variants = {
-    hidden: { y: 100, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 1,
-        ease: [0.16, 1, 0.3, 1], // Custom easing for smooth reveal
-      },
-    },
-  };
-
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center px-6 overflow-hidden">
-      {/* Background Aurora */}
-      <div className="absolute inset-0 z-0">
-        <img 
-          src={auroraBg} 
-          alt="Aurora Background" 
-          className="w-full h-full object-cover opacity-60 mix-blend-multiply blur-3xl scale-110"
-        />
-        <div className="absolute inset-0 bg-white/40" />
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 bg-[#FAFAFA]">
+      {/* Mesh Gradient Background */}
+      <div className="absolute inset-0 z-0 opacity-40">
+        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-blue-300/30 rounded-full mix-blend-multiply filter blur-3xl animate-blob" />
+        <div className="absolute top-1/3 right-1/4 w-[500px] h-[500px] bg-purple-300/30 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-2000" />
+        <div className="absolute -bottom-32 left-1/3 w-[500px] h-[500px] bg-blue-100/50 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-4000" />
       </div>
 
-      <motion.div 
-        className="relative z-10 max-w-7xl mx-auto text-center"
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        <motion.h1 className="text-6xl md:text-8xl lg:text-9xl font-light tracking-tight leading-[0.9] text-primary mb-8">
-          <motion.span className="block" variants={itemVariants}>The Infrastructure</motion.span>
-          <motion.span className="block" variants={itemVariants}>of Growth.</motion.span>
-        </motion.h1>
-
-        <motion.p 
-          className="text-xl md:text-2xl text-secondary font-light max-w-2xl mx-auto"
-          variants={itemVariants}
+      <div className="container mx-auto px-6 relative z-10 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: "easeOut" }}
         >
-          We automate chaos. We scale revenue.
-        </motion.p>
-      </motion.div>
+          <h1 className="text-6xl md:text-8xl lg:text-9xl font-light tracking-tighter leading-[0.95] text-gray-900 mb-8">
+            The Infrastructure<br />
+            of Growth.
+          </h1>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
+        >
+          <p className="text-xl md:text-2xl font-light text-gray-500 tracking-wide">
+            We automate chaos. We scale revenue.
+          </p>
+        </motion.div>
+      </div>
+
+      <style>{`
+        @keyframes blob {
+          0% { transform: translate(0px, 0px) scale(1); }
+          33% { transform: translate(30px, -50px) scale(1.1); }
+          66% { transform: translate(-20px, 20px) scale(0.9); }
+          100% { transform: translate(0px, 0px) scale(1); }
+        }
+        .animate-blob {
+          animation: blob 10s infinite;
+        }
+        .animation-delay-2000 {
+          animation-delay: 2s;
+        }
+        .animation-delay-4000 {
+          animation-delay: 4s;
+        }
+      `}</style>
     </section>
   );
 }
