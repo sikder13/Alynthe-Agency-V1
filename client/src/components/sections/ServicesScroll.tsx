@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
+import { Activity, ArrowUpRight } from "lucide-react";
 
 const services = [
   {
@@ -41,23 +42,54 @@ const services = [
 
 function VisualCard({ id }: { id: number }) {
   if (id === 0) {
-    // Card 1: Mini Browser Window
+    // Card 1: Colorful Dashboard (Glassmorphic)
     return (
-      <div className="border border-neutral-200 rounded-lg overflow-hidden bg-white shadow-sm w-full aspect-[4/3] flex flex-col">
-        <div className="bg-neutral-50 px-4 py-3 border-b border-neutral-200 flex gap-2">
-          <div className="w-2.5 h-2.5 rounded-full bg-red-400" />
-          <div className="w-2.5 h-2.5 rounded-full bg-yellow-400" />
-          <div className="w-2.5 h-2.5 rounded-full bg-green-400" />
+      <div className="border border-white/40 rounded-xl overflow-hidden bg-white/60 backdrop-blur-xl shadow-lg w-full aspect-[4/3] flex flex-col relative">
+        {/* Gradient Hero Header */}
+        <div className="h-28 bg-gradient-to-r from-indigo-400 via-purple-400 to-indigo-400 relative overflow-hidden">
+          <div className="absolute inset-0 bg-white/10 pattern-grid-lg opacity-20" />
         </div>
-        <div className="p-6 space-y-4 bg-neutral-50/30 flex-1 relative">
-           <div className="h-40 bg-neutral-100 rounded w-full border border-neutral-200/50" />
-           <div className="flex gap-4">
-              <div className="h-16 bg-neutral-100 rounded w-1/3 border border-neutral-200/50" />
-              <div className="h-16 bg-neutral-100 rounded w-1/3 border border-neutral-200/50" />
-              <div className="h-16 bg-neutral-100 rounded w-1/3 border border-neutral-200/50" />
+
+        {/* Content Area */}
+        <div className="p-6 flex-1 bg-white/40 relative">
+           {/* Floating Stat Bubble 1 */}
+           <motion.div 
+             initial={{ y: 10, opacity: 0 }}
+             whileInView={{ y: 0, opacity: 1 }}
+             transition={{ delay: 0.2, duration: 0.5 }}
+             className="absolute -top-6 right-6 bg-white px-4 py-2 rounded-lg shadow-md border border-gray-100 flex items-center gap-2"
+           >
+             <div className="bg-green-100 p-1 rounded-full">
+               <ArrowUpRight className="w-3 h-3 text-green-600" />
+             </div>
+             <div>
+               <div className="text-[10px] text-gray-400 font-medium uppercase tracking-wider">Conversion</div>
+               <div className="text-sm font-bold text-gray-800">+40%</div>
+             </div>
+           </motion.div>
+
+           {/* Floating Stat Bubble 2 */}
+           <motion.div 
+             initial={{ y: 10, opacity: 0 }}
+             whileInView={{ y: 0, opacity: 1 }}
+             transition={{ delay: 0.4, duration: 0.5 }}
+             className="absolute top-8 left-6 bg-white px-4 py-2 rounded-lg shadow-md border border-gray-100 flex items-center gap-2"
+           >
+             <div className="bg-blue-100 p-1 rounded-full">
+               <Activity className="w-3 h-3 text-blue-600" />
+             </div>
+             <div>
+               <div className="text-[10px] text-gray-400 font-medium uppercase tracking-wider">Engagement</div>
+               <div className="text-sm font-bold text-gray-800">2m 45s</div>
+             </div>
+           </motion.div>
+
+           {/* Mock Content Lines */}
+           <div className="mt-12 space-y-3">
+             <div className="h-2 bg-gray-200 rounded w-3/4" />
+             <div className="h-2 bg-gray-100 rounded w-full" />
+             <div className="h-2 bg-gray-100 rounded w-5/6" />
            </div>
-           {/* Abstract floating elements */}
-           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-blue-100/50 rounded-full blur-xl animate-pulse" />
         </div>
       </div>
     );
@@ -129,9 +161,9 @@ function VisualCard({ id }: { id: number }) {
   return null;
 }
 
-// --- Main Components ---
+// --- Scroll Card Component ---
 
-function ServiceCard({ service, setActive, index }: { service: typeof services[0], setActive: (id: number) => void, index: number }) {
+function ScrollCard({ service, setActive, index }: { service: typeof services[0], setActive: (id: number) => void, index: number }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { margin: "-50% 0px -50% 0px", amount: 0.5 });
 
@@ -172,6 +204,8 @@ function ServiceCard({ service, setActive, index }: { service: typeof services[0
   );
 }
 
+// --- Main Scroll Section ---
+
 export function ServicesScroll() {
   const [activeId, setActiveId] = useState(0);
 
@@ -209,7 +243,7 @@ export function ServicesScroll() {
           {/* Right Column - Scroll */}
           <div className="w-full lg:w-1/2 pb-24 pt-12 lg:pt-0">
             {services.map((service, index) => (
-              <ServiceCard 
+              <ScrollCard 
                 key={service.id} 
                 service={service} 
                 setActive={setActiveId} 
