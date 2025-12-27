@@ -39,7 +39,7 @@ export async function registerRoutes(
   // POST /api/chat - Sarah AI chatbot endpoint with streaming
   app.post("/api/chat", async (req, res) => {
     try {
-      const { messages } = req.body;
+      const { messages, userName } = req.body;
 
       if (!messages || !Array.isArray(messages)) {
         return res.status(400).json({ error: "Messages array is required" });
@@ -49,10 +49,14 @@ export async function registerRoutes(
       res.setHeader("Cache-Control", "no-cache");
       res.setHeader("Connection", "keep-alive");
 
+      const systemPrompt = userName 
+        ? `${SARAH_SYSTEM_PROMPT}\n\nIMPORTANT: You are speaking with ${userName}. Use their first name naturally in conversation when appropriate.`
+        : SARAH_SYSTEM_PROMPT;
+
       const stream = await openai.chat.completions.create({
         model: "gpt-4o-mini",
         messages: [
-          { role: "system", content: SARAH_SYSTEM_PROMPT },
+          { role: "system", content: systemPrompt },
           ...messages
         ],
         stream: true,
