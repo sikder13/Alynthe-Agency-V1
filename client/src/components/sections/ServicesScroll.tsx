@@ -168,8 +168,8 @@ function VisualCard({ id }: { id: number }) {
 
 function ScrollCard({ service, setActive, index }: { service: typeof services[0], setActive: (id: number) => void, index: number }) {
   const ref = useRef(null);
-  // Increased threshold to 0.6 as requested for more reliable triggering
-  const isInView = useInView(ref, { margin: "-50% 0px -50% 0px", amount: 0.6 });
+  // Use margin -50% to trigger when the element is in the middle of the viewport
+  const isInView = useInView(ref, { margin: "-50% 0px -50% 0px" });
 
   useEffect(() => {
     if (isInView) {
@@ -178,16 +178,18 @@ function ScrollCard({ service, setActive, index }: { service: typeof services[0]
   }, [isInView, index, setActive]);
 
   return (
-    <motion.div
+    <div
       ref={ref}
-      id={service.hash} // Added ID for hash scrolling
-      className="min-h-[90vh] flex items-center justify-center p-6 md:p-8"
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-10%" }}
-      transition={{ duration: 0.8 }}
+      id={service.hash} // Explicit ID for hash scrolling
+      className="min-h-[80vh] flex items-center justify-center py-12"
     >
-      <div className="bg-white/80 backdrop-blur-md p-8 md:p-12 rounded-3xl shadow-sm border border-white/50 w-full max-w-xl flex flex-col gap-8">
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-10%" }}
+        transition={{ duration: 0.8 }}
+        className="bg-white/80 backdrop-blur-md p-8 md:p-12 rounded-3xl shadow-sm border border-white/50 w-full max-w-xl flex flex-col gap-8"
+      >
         <h3 className="text-2xl font-light text-gray-900 md:hidden">{service.title}</h3>
         
         {/* Visual Asset */}
@@ -204,8 +206,8 @@ function ScrollCard({ service, setActive, index }: { service: typeof services[0]
             </li>
           ))}
         </ul>
-      </div>
-    </motion.div>
+      </motion.div>
+    </div>
   );
 }
 
@@ -214,28 +216,28 @@ function ScrollCard({ service, setActive, index }: { service: typeof services[0]
 export function ServicesScroll() {
   const [activeId, setActiveId] = useState(0);
 
-  // Auto-scroll to hash on mount
+  // Auto-scroll to hash on mount with timeout
   useEffect(() => {
     if (window.location.hash) {
       const id = window.location.hash.replace("#", "");
-      const element = document.getElementById(id);
-      if (element) {
-        setTimeout(() => {
+      
+      // Small timeout to ensure rendering
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
           element.scrollIntoView({ behavior: 'smooth' });
-        }, 100);
-      }
+        }
+      }, 100);
     }
   }, []);
 
   return (
-    // Ensuring items-start is set on parent for sticky behavior
-    <section className="relative bg-transparent">
+    <section className="relative w-full">
       <div className="container mx-auto px-6 md:px-12">
-        <div className="flex flex-col lg:flex-row items-start"> 
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
           
           {/* Left Column - Sticky */}
-          {/* Added h-fit and top-[20%] as requested */}
-          <div className="hidden lg:flex lg:w-1/2 sticky top-[20%] h-fit flex-col justify-center pr-20">
+          <div className="hidden lg:block sticky top-32 h-fit">
             <div className="relative h-64 w-full"> 
               {services.map((service, index) => (
                 <motion.div
@@ -261,7 +263,7 @@ export function ServicesScroll() {
           </div>
 
           {/* Right Column - Scroll */}
-          <div className="w-full lg:w-1/2 pb-24 pt-12 lg:pt-0">
+          <div className="w-full pb-24">
             {services.map((service, index) => (
               <ScrollCard 
                 key={service.id} 
