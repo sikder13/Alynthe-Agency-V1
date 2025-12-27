@@ -12,6 +12,7 @@ import Contact from "@/pages/Contact";
 import BlogIndex from "@/pages/blog/Index";
 import AgencyDead from "@/pages/blog/AgencyDead";
 import SalesEngineBlueprint from "@/pages/blog/SalesEngineBlueprint";
+import ROISilence from "@/pages/blog/ROISilence";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -25,6 +26,7 @@ function Router() {
       <Route path="/blog" component={BlogIndex} />
       <Route path="/blog/agency-dead" component={AgencyDead} />
       <Route path="/blog/sales-engine-blueprint" component={SalesEngineBlueprint} />
+      <Route path="/blog/roi-of-silence" component={ROISilence} />
       <Route component={NotFound} />
     </Switch>
   );

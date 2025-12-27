@@ -8,6 +8,15 @@ import { ArrowRight } from "lucide-react";
 
 const articles = [
   {
+    id: "roi-of-silence",
+    tag: "ROI ANALYSIS",
+    date: "DEC 27",
+    title: "The ROI of Silence: How AI Turns Busy Work into Revenue.",
+    excerpt: "We don't sell software; we sell time. Here's the math behind our 340% ROI claim—no fluff, just numbers.",
+    href: "/blog/roi-of-silence",
+    gradientVariant: "gold" as const
+  },
+  {
     id: "agency-dead",
     tag: "STRATEGY",
     date: "OCT 24",

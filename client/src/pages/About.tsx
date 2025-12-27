@@ -164,7 +164,7 @@ export default function About() {
                   <h3 className="text-2xl font-bold text-gray-900">Shadman Khan</h3>
                   <p className="text-xs uppercase tracking-widest text-neutral-500 font-semibold">FOUNDER & CEO</p>
                   <p className="text-gray-600 font-light leading-relaxed mt-4 max-w-sm">
-                    The strategist. He bridges the gap between business vision and digital infrastructure, ensuring every system scales revenue.
+                    The Strategist. A Purdue alumnus and fixture in the Indianapolis tech scene, Shadman has spent 7+ years architecting digital infrastructure for the region's largest Fortune 500 pharmaceutical and financial institutions. He bridges the gap between corporate-grade reliability and agile startup speed.
                   </p>
                 </div>
               </motion.div>

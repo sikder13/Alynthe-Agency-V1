@@ -1,24 +1,33 @@
 import { motion } from "framer-motion";
 
 interface AnimatedGradientProps {
-  variant?: "purple" | "teal";
+  variant?: "purple" | "teal" | "gold";
   className?: string;
 }
 
 export function AnimatedGradient({ variant = "purple", className = "" }: AnimatedGradientProps) {
-  const colors = variant === "purple" 
-    ? {
-        blob1: "bg-purple-600/60",
-        blob2: "bg-indigo-500/50",
-        blob3: "bg-blue-900/70",
-        base: "bg-slate-900"
-      }
-    : {
-        blob1: "bg-cyan-500/50",
-        blob2: "bg-emerald-600/60",
-        blob3: "bg-slate-800/70",
-        base: "bg-slate-900"
-      };
+  const colorMap = {
+    purple: {
+      blob1: "bg-purple-600/60",
+      blob2: "bg-indigo-500/50",
+      blob3: "bg-blue-900/70",
+      base: "bg-slate-900"
+    },
+    teal: {
+      blob1: "bg-cyan-500/50",
+      blob2: "bg-emerald-600/60",
+      blob3: "bg-slate-800/70",
+      base: "bg-slate-900"
+    },
+    gold: {
+      blob1: "bg-emerald-500/50",
+      blob2: "bg-yellow-500/60",
+      blob3: "bg-amber-600/70",
+      base: "bg-slate-900"
+    }
+  };
+  
+  const colors = colorMap[variant];
 
   return (
     <div className={`absolute inset-0 overflow-hidden ${colors.base} ${className}`}>

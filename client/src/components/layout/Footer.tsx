@@ -55,6 +55,9 @@ export default function Footer() {
               Indianapolis, IN 46203,<br />
               USA
             </p>
+            <span className="inline-block text-xs font-medium tracking-widest uppercase text-gray-400 border border-gray-200 px-3 py-1.5 rounded-full w-fit">
+              Engineered in Indianapolis. Deployed Globally.
+            </span>
           </div>
 
           {/* Connect Column */}
