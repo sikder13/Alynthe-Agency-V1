@@ -3,19 +3,66 @@ import { motion } from "framer-motion";
 export function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 bg-[#FAFAFA]">
-      {/* Moving Mesh Gradient Background */}
+      {/* Moving Mesh Gradient Background - Orbs */}
       <div className="absolute inset-0 z-0 overflow-hidden">
-        <div className="absolute top-[20%] left-[20%] w-[50vw] h-[50vw] bg-[#3B82F6] rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob" />
-        <div className="absolute top-[20%] right-[20%] w-[50vw] h-[50vw] bg-[#A855F7] rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000" />
+        {/* Orb 1: Faint Icy Blue */}
+        <motion.div
+          className="absolute top-[20%] left-[20%] w-[45vw] h-[45vw] bg-blue-100/40 rounded-full mix-blend-multiply filter blur-3xl"
+          animate={{
+            x: [-50, 50, -20, -50],
+            y: [-30, 30, -50, -30],
+            scale: [1, 1.1, 0.9, 1],
+          }}
+          transition={{
+            duration: 25,
+            repeat: Infinity,
+            repeatType: "mirror",
+            ease: "easeInOut",
+          }}
+        />
+        {/* Orb 2: Very Pale Violet */}
+        <motion.div
+          className="absolute top-[15%] right-[15%] w-[50vw] h-[50vw] bg-purple-100/40 rounded-full mix-blend-multiply filter blur-3xl"
+          animate={{
+            x: [50, -50, 30, 50],
+            y: [40, -40, 20, 40],
+            scale: [1, 1.2, 0.8, 1],
+          }}
+          transition={{
+            duration: 28,
+            repeat: Infinity,
+            repeatType: "mirror",
+            ease: "easeInOut",
+          }}
+        />
+        {/* Orb 3: Neutral Slate */}
+        <motion.div
+          className="absolute bottom-[10%] left-[30%] w-[55vw] h-[55vw] bg-slate-100/60 rounded-full mix-blend-multiply filter blur-3xl"
+          animate={{
+            x: [-30, 60, -40, -30],
+            y: [30, -60, 40, 30],
+            scale: [1, 0.9, 1.1, 1],
+          }}
+          transition={{
+            duration: 32,
+            repeat: Infinity,
+            repeatType: "mirror",
+            ease: "easeInOut",
+          }}
+        />
       </div>
 
+      {/* Glassmorphism Layer & Overlay */}
+      <div className="absolute inset-0 z-0 backdrop-blur-[100px] bg-white/60" />
+
+      {/* Content */}
       <div className="container mx-auto px-6 relative z-10 text-center">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: "easeOut" }}
+          transition={{ duration: 1.2, ease: "easeOut" }}
         >
-          <h1 className="text-6xl md:text-8xl lg:text-9xl font-light tracking-tighter leading-[0.95] text-gray-900 mb-8">
+          <h1 className="text-6xl md:text-8xl lg:text-9xl font-light tracking-tighter leading-[0.95] text-neutral-900 mb-8">
             The Infrastructure<br />
             of Growth.
           </h1>
@@ -24,28 +71,16 @@ export function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
+          transition={{ duration: 1.2, delay: 0.3, ease: "easeOut" }}
         >
-          <p className="text-xl md:text-2xl font-light text-gray-500 tracking-wide">
+          <p className="text-xl md:text-2xl font-light text-neutral-500 tracking-wide">
             We automate chaos. We scale revenue.
           </p>
         </motion.div>
       </div>
 
-      <style>{`
-        @keyframes blob {
-          0% { transform: translate(0px, 0px) scale(1); }
-          33% { transform: translate(30px, -50px) scale(1.1); }
-          66% { transform: translate(-20px, 20px) scale(0.9); }
-          100% { transform: translate(0px, 0px) scale(1); }
-        }
-        .animate-blob {
-          animation: blob 7s infinite;
-        }
-        .animation-delay-2000 {
-          animation-delay: 2s;
-        }
-      `}</style>
+      {/* Edge Fade Mask */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white via-white/80 to-transparent z-20 pointer-events-none" />
     </section>
   );
 }
