@@ -100,13 +100,22 @@ export async function registerRoutes(
 
       res.write(`data: ${JSON.stringify({ done: true })}\n\n`);
       res.end();
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error in chat:", error);
+      
+      const fallbackMessage = "I am currently recalibrating. Please use the contact form below, or book a call directly at https://calendly.com/alynthe/strategy";
+      
       if (res.headersSent) {
-        res.write(`data: ${JSON.stringify({ error: "Failed to get response" })}\n\n`);
+        res.write(`data: ${JSON.stringify({ content: fallbackMessage })}\n\n`);
+        res.write(`data: ${JSON.stringify({ done: true })}\n\n`);
         res.end();
       } else {
-        res.status(500).json({ error: "Failed to process chat" });
+        res.setHeader("Content-Type", "text/event-stream");
+        res.setHeader("Cache-Control", "no-cache");
+        res.setHeader("Connection", "keep-alive");
+        res.write(`data: ${JSON.stringify({ content: fallbackMessage })}\n\n`);
+        res.write(`data: ${JSON.stringify({ done: true })}\n\n`);
+        res.end();
       }
     }
   });
