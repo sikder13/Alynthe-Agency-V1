@@ -5,46 +5,46 @@ export function Hero() {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 bg-[#FAFAFA]">
       {/* Moving Mesh Gradient Background - Orbs */}
       <div className="absolute inset-0 z-0 overflow-hidden">
-        {/* Orb 1: Faint Icy Blue */}
+        {/* Orb 1: Indigo - Stronger Color */}
         <motion.div
-          className="absolute top-[20%] left-[20%] w-[45vw] h-[45vw] bg-blue-100/40 rounded-full mix-blend-multiply filter blur-3xl"
+          className="absolute top-[20%] left-[20%] w-[45vw] h-[45vw] bg-indigo-400/30 rounded-full mix-blend-multiply filter blur-[120px]"
           animate={{
             x: [-50, 50, -20, -50],
             y: [-30, 30, -50, -30],
             scale: [1, 1.1, 0.9, 1],
           }}
           transition={{
-            duration: 25,
+            duration: 12,
             repeat: Infinity,
             repeatType: "mirror",
             ease: "easeInOut",
           }}
         />
-        {/* Orb 2: Very Pale Violet */}
+        {/* Orb 2: Purple - Stronger Color */}
         <motion.div
-          className="absolute top-[15%] right-[15%] w-[50vw] h-[50vw] bg-purple-100/40 rounded-full mix-blend-multiply filter blur-3xl"
+          className="absolute top-[15%] right-[15%] w-[50vw] h-[50vw] bg-purple-400/30 rounded-full mix-blend-multiply filter blur-[120px]"
           animate={{
             x: [50, -50, 30, 50],
             y: [40, -40, 20, 40],
             scale: [1, 1.2, 0.8, 1],
           }}
           transition={{
-            duration: 28,
+            duration: 15,
             repeat: Infinity,
             repeatType: "mirror",
             ease: "easeInOut",
           }}
         />
-        {/* Orb 3: Neutral Slate */}
+        {/* Orb 3: Blue - Stronger Color */}
         <motion.div
-          className="absolute bottom-[10%] left-[30%] w-[55vw] h-[55vw] bg-slate-100/60 rounded-full mix-blend-multiply filter blur-3xl"
+          className="absolute bottom-[10%] left-[30%] w-[55vw] h-[55vw] bg-blue-400/30 rounded-full mix-blend-multiply filter blur-[120px]"
           animate={{
             x: [-30, 60, -40, -30],
             y: [30, -60, 40, 30],
             scale: [1, 0.9, 1.1, 1],
           }}
           transition={{
-            duration: 32,
+            duration: 13,
             repeat: Infinity,
             repeatType: "mirror",
             ease: "easeInOut",
@@ -52,8 +52,8 @@ export function Hero() {
         />
       </div>
 
-      {/* Glassmorphism Layer & Overlay */}
-      <div className="absolute inset-0 z-0 backdrop-blur-[100px] bg-white/60" />
+      {/* Glassmorphism Layer & Overlay - Reduced opacity to allow colors to shine through */}
+      <div className="absolute inset-0 z-0 backdrop-blur-[100px] bg-white/30" />
 
       {/* Content */}
       <div className="container mx-auto px-6 relative z-10 text-center">
