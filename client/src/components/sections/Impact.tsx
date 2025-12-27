@@ -49,28 +49,28 @@ export function Impact() {
           </div>
 
           {/* Right Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-gray-200 border border-gray-200">
-            <div className="bg-white p-12 flex flex-col gap-2 aspect-square justify-center hover:bg-blue-50/30 transition-colors">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-px md:bg-gray-200 md:border md:border-gray-200">
+            <div className="bg-white p-8 md:p-12 flex flex-col gap-2 md:aspect-square justify-center hover:bg-blue-50/30 transition-colors border border-gray-200 md:border-0">
               <span className="text-gray-500 text-sm font-medium">Projects completed</span>
-              <span className="text-5xl md:text-6xl font-light text-gray-900">
+              <span className="text-4xl md:text-5xl lg:text-6xl font-light text-gray-900">
                 <Counter from={0} to={180} suffix="+" />
               </span>
             </div>
-            <div className="bg-white p-12 flex flex-col gap-2 aspect-square justify-center hover:bg-blue-50/30 transition-colors">
+            <div className="bg-white p-8 md:p-12 flex flex-col gap-2 md:aspect-square justify-center hover:bg-blue-50/30 transition-colors border border-gray-200 md:border-0">
               <span className="text-gray-500 text-sm font-medium">Average client ROI</span>
-              <span className="text-5xl md:text-6xl font-light text-gray-900 text-blue-600">
+              <span className="text-4xl md:text-5xl lg:text-6xl font-light text-blue-600">
                 <Counter from={0} to={340} suffix="%" />
               </span>
             </div>
-            <div className="bg-white p-12 flex flex-col gap-2 aspect-square justify-center hover:bg-blue-50/30 transition-colors">
+            <div className="bg-white p-8 md:p-12 flex flex-col gap-2 md:aspect-square justify-center hover:bg-blue-50/30 transition-colors border border-gray-200 md:border-0">
               <span className="text-gray-500 text-sm font-medium">Client retention rate</span>
-              <span className="text-5xl md:text-6xl font-light text-gray-900">
+              <span className="text-4xl md:text-5xl lg:text-6xl font-light text-gray-900">
                 <Counter from={0} to={92} suffix="%" />
               </span>
             </div>
-            <div className="bg-white p-12 flex flex-col gap-2 aspect-square justify-center hover:bg-blue-50/30 transition-colors">
+            <div className="bg-white p-8 md:p-12 flex flex-col gap-2 md:aspect-square justify-center hover:bg-blue-50/30 transition-colors border border-gray-200 md:border-0">
               <span className="text-gray-500 text-sm font-medium">Annual Hours Saved</span>
-              <span className="text-5xl md:text-6xl font-light text-gray-900">
+              <span className="text-4xl md:text-5xl lg:text-6xl font-light text-gray-900">
                 <Counter from={0} to={12000} suffix="+" />
               </span>
             </div>
