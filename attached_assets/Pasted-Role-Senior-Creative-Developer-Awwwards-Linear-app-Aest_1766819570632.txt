@@ -1,0 +1,117 @@
+Role: Senior Creative Developer (Awwwards/Linear.app Aesthetic) Task: Build a production-ready, ultra-minimal landing page for "Alynthe" (A Digital Growth & Automation Consultancy). Tech: Next.js 14, Tailwind CSS, Framer Motion.
+
+═══════════════════════════════════════════ 1. THE DESIGN SYSTEM (Premium Minimal) ═══════════════════════════════════════════
+
+Theme: Light Mode Only. A "Paper White" aesthetic.
+
+Background: #FAFAFA (Off-white) to #FFFFFF gradients.
+
+Typography: 'Inter' (Google Fonts).
+
+Headings: Light font-weight, tight tracking (tracking-tight), large scale.
+
+Body: High readability, generous line-height (leading-relaxed).
+
+Colors:
+
+Primary: #111111 (Ink Black)
+
+Secondary: #666666 (Graphite)
+
+Accent: #2563EB (International Blue) - Use only for hover states and the primary button.
+
+Spacing: "Museum Spacing." Use py-24 or py-32. Do not crowd the layout.
+
+═══════════════════════════════════════════ 2. PAGE STRUCTURE & CONTENT ═══════════════════════════════════════════
+
+A. NAVIGATION (Sticky, Glassmorphism)
+
+Left: Logo Icon (Geometric Square) + Text "ALYNTHE" (Medium weight).
+
+Right:
+
+Desktop: A simple text link "Menu" (opens overlay) + Button "Book Consultation" (Outlined, Pill-shape).
+
+Mobile: Hamburger Icon.
+
+B. HERO SECTION (The "Infrastructure" Statement)
+
+Layout: Centered, ample whitespace. min-h-screen.
+
+Headline: "The Infrastructure of Growth." (text-6xl md:text-8xl, font-light).
+
+Animation: Words stagger in from the bottom.
+
+Subtext: "We automate chaos. We scale revenue." (text-xl, text-gray-500).
+
+Visual: A subtle, moving "Aurora" gradient blur (Blue/Purple/Gray) floating behind the text. No heavy images.
+
+C. THE "CAPABILITIES" SECTION (The Service Pillars)
+
+Constraint: Do NOT use a grid. Use a Vertical Focus List.
+
+Design: Full-width rows with a fine 1px border between them.
+
+Interaction: On hover, the row expands vertically to reveal details.
+
+Row 1: Digital Experience
+
+Headline: "Experience Design"
+
+Hover Reveal: "Web Design, UI/UX, Video Editing, Content Writing."
+
+Row 2: Growth Engines
+
+Headline: "Traffic & Authority"
+
+Hover Reveal: "SEO, Google Ads, Social Media Management, Profile Building."
+
+Row 3: Intelligent Systems
+
+Headline: "AI Infrastructure"
+
+Hover Reveal: "Custom AI Solutions, Micro-services, Automation Workflows."
+
+D. THE FOOTER (Studio Details)
+
+Layout: Clean 4-column grid (Desktop) / Stacked (Mobile).
+
+Column 1 (Brand):
+
+Logo "Alynthe"
+
+"© 2026 Alynthe LLC. All rights reserved."
+
+Column 2 (Studio):
+
+Heading: "Indianapolis"
+
+Text: "1438 Spann Ave, Indianapolis, IN 46203, USA"
+
+Column 3 (Contact):
+
+Heading: "Connect"
+
+Link: "alyntheinfo@gmail.com"
+
+Link: "+1 929 350 8374"
+
+Column 4 (Sitemap):
+
+Links: Services, Work, Methodology.
+
+═══════════════════════════════════════════ 3. ANIMATION LOGIC (Framer Motion) ═══════════════════════════════════════════
+
+Scroll Reveal: As the user scrolls, elements should softly fade in and move up (y: 20 to y: 0).
+
+Smoothness: The site must feel fluid.
+
+Hover Effects: Text should change color to Blue (#2563EB) instantly, but layout changes (expansion) should be smooth (duration-500).
+
+═══════════════════════════════════════════ 4. TECHNICAL CONSTRAINTS ═══════════════════════════════════════════
+
+Use lucide-react for icons.
+
+Ensure mobile responsiveness (stack columns on screens < 768px).
+
+Do NOT use dummy text. Use the real copy provided above.
