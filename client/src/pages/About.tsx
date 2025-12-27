@@ -144,7 +144,7 @@ export default function About() {
               <p className="text-lg text-gray-500 font-light">The minds behind the machine.</p>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
               {/* Founder 1 */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -154,10 +154,11 @@ export default function About() {
                 className="group"
               >
                 <div className="bg-neutral-100 aspect-square rounded-lg mb-6 overflow-hidden transition-all duration-500 group-hover:shadow-lg group-hover:bg-neutral-200 relative">
-                  {/* Photo placeholder */}
-                  <div className="absolute inset-0 flex items-center justify-center text-neutral-300 font-light">
-                    Photo Pending
-                  </div>
+                  <img
+                    src="/team/shadman.jpeg"
+                    alt="Shadman Khan"
+                    className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-500"
+                  />
                 </div>
                 <div className="space-y-2">
                   <h3 className="text-2xl font-bold text-gray-900">Shadman Khan</h3>
@@ -177,10 +178,11 @@ export default function About() {
                 className="group"
               >
                 <div className="bg-neutral-100 aspect-square rounded-lg mb-6 overflow-hidden transition-all duration-500 group-hover:shadow-lg group-hover:bg-neutral-200 relative">
-                  {/* Photo placeholder */}
-                  <div className="absolute inset-0 flex items-center justify-center text-neutral-300 font-light">
-                    Photo Pending
-                  </div>
+                  <img
+                    src="/team/udaay.jpeg"
+                    alt="Udaay Sikder"
+                    className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-500"
+                  />
                 </div>
                 <div className="space-y-2">
                   <h3 className="text-2xl font-bold text-gray-900">Udaay Sikder</h3>
