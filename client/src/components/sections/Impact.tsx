@@ -1,6 +1,7 @@
 import { motion, useSpring, useTransform, useInView } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight } from "lucide-react";
+import { Link } from "wouter";
 
 function Counter({ from, to, suffix = "" }: { from: number; to: number; suffix?: string }) {
   const ref = useRef(null);
@@ -38,10 +39,12 @@ export function Impact() {
               We measure what matters. Our infrastructure directly correlates to revenue, efficiency, and scalability.
             </p>
             <div>
-              <button className="group flex items-center gap-3 px-8 py-4 border border-gray-900 rounded-full hover:bg-black hover:text-white transition-all duration-300">
-                <span className="font-medium">See our work</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </button>
+              <Link href="/about">
+                <a className="group inline-flex items-center gap-3 px-8 py-4 border border-gray-900 rounded-full hover:bg-black hover:text-white transition-all duration-300">
+                  <span className="font-medium">Our Philosophy</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </a>
+              </Link>
             </div>
           </div>
 

@@ -1,0 +1,57 @@
+Role: Senior Frontend Engineer. Task: Fix 4 critical issues on the Homepage.
+
+═══════════════════════════════════════════ 1. FIX HERO ANIMATION (Make it "Alive") ═══════════════════════════════════════════
+
+The Hero background is currently too static.
+
+Action: Implement an "Aurora Gradient" background behind the text "The Infrastructure of Growth".
+
+Technical: Create 3 absolute-positioned div elements with heavy blur (blur-3xl) and different colors (Blue #2563EB, Light Purple #C084FC, Soft Cyan #22D3EE).
+
+Animation: Use framer-motion or CSS @keyframes to make these blobs slowly float/rotate around the screen (animate-blob).
+
+Constraint: Ensure the text remains readable on top (z-index).
+
+═══════════════════════════════════════════ 2. RESTORE FOOTER DETAILS (Critical) ═══════════════════════════════════════════
+
+The footer contact info went missing. Hardcode this specific data into the Footer columns:
+
+Column 1 (Logo): Alynthe Logo + "© 2026 Alynthe LLC. All rights reserved."
+
+Column 2 (Address):
+
+Header: "Indianapolis"
+
+Text: "1438 Spann Ave, Indianapolis, IN 46203, USA"
+
+Column 3 (Connect):
+
+Header: "Contact"
+
+Email: "alyntheinfo@gmail.com"
+
+Phone: "+1 929 350 8374"
+
+Social Icons: Facebook, Instagram, LinkedIn, X.
+
+═══════════════════════════════════════════ 3. IMPACT SECTION UPDATE ═══════════════════════════════════════════
+
+Locate the "Impact" section (where the numbers count up).
+
+Change Button Text: From "See our work" → "Our Philosophy".
+
+Change Action: The button must link to the /about page.
+
+═══════════════════════════════════════════ 4. "SARAH" CHATBOT INTEGRATION ═══════════════════════════════════════════
+
+Global Trigger: The Chatbot component must be accessible from anywhere.
+
+Wiring: In the "Ready to grow?" section, modify the "Get Started" and "Schedule Call" buttons.
+
+Action: When clicked, these buttons should OPEN the Sarah Chatbot window (do not navigate to a new page).
+
+Chat Logic: When opened via these buttons, Sarah should send a starting message:
+
+"Hello! I can help you schedule a call. What is your name?"
+
+Logic: Simple form flow -> Ask Name -> Ask Email -> Ask Goal -> Message "Thanks, a strategist will call you at +1 929 350 8374."

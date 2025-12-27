@@ -44,6 +44,10 @@ function FAQItem({ question, answer }: { question: string, answer: string }) {
 }
 
 export function FAQ() {
+  const openChatbot = () => {
+    window.dispatchEvent(new CustomEvent('open-chatbot'));
+  };
+
   return (
     <section className="py-24 bg-white">
       <div className="container mx-auto px-6 md:px-12">
@@ -54,10 +58,16 @@ export function FAQ() {
             Ready to grow your business?
           </h2>
           <div className="flex gap-4">
-            <button className="px-8 py-4 bg-black text-white rounded-full font-medium hover:bg-gray-800 transition-colors">
+            <button 
+              onClick={openChatbot}
+              className="px-8 py-4 bg-black text-white rounded-full font-medium hover:bg-gray-800 transition-colors"
+            >
               Get started
             </button>
-            <button className="px-8 py-4 border border-gray-200 text-gray-900 rounded-full font-medium hover:border-black transition-colors">
+            <button 
+              onClick={openChatbot}
+              className="px-8 py-4 border border-gray-200 text-gray-900 rounded-full font-medium hover:border-black transition-colors"
+            >
               Schedule call
             </button>
           </div>

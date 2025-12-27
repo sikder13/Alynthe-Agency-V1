@@ -29,36 +29,56 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-sm text-gray-400 font-light">
-              © 2026 Alynthe LLC.
+              © 2026 Alynthe LLC. All rights reserved.
+            </p>
+          </div>
+
+          {/* Address Column */}
+          <div className="md:col-span-3 md:col-start-6 flex flex-col gap-6">
+            <h4 className="text-sm font-semibold text-gray-900 uppercase tracking-widest">Indianapolis</h4>
+            <p className="text-base text-gray-500 font-light leading-relaxed">
+              1438 Spann Ave,<br />
+              Indianapolis, IN 46203,<br />
+              USA
             </p>
           </div>
 
           {/* Connect Column */}
-          <div className="md:col-span-3 md:col-start-6 flex flex-col gap-6">
-            <h4 className="text-sm font-semibold text-gray-900 uppercase tracking-widest">Connect</h4>
-            <div className="flex gap-4">
+          <div className="md:col-span-2 md:col-start-9 flex flex-col gap-6">
+            <h4 className="text-sm font-semibold text-gray-900 uppercase tracking-widest">Contact</h4>
+            <div className="flex flex-col gap-2">
+              <a href="mailto:alyntheinfo@gmail.com" className="text-base text-gray-500 hover:text-black transition-colors font-light">
+                alyntheinfo@gmail.com
+              </a>
+              <a href="tel:+19293508374" className="text-base text-gray-500 hover:text-black transition-colors font-light">
+                +1 929 350 8374
+              </a>
+            </div>
+            <div className="flex gap-3 mt-2">
                <a href="#" className="p-2 border border-gray-200 rounded-full hover:bg-black hover:text-white hover:border-black transition-all">
-                 <Facebook className="w-5 h-5" />
+                 <Facebook className="w-4 h-4" />
                </a>
                <a href="#" className="p-2 border border-gray-200 rounded-full hover:bg-black hover:text-white hover:border-black transition-all">
-                 <Instagram className="w-5 h-5" />
+                 <Instagram className="w-4 h-4" />
                </a>
                <a href="#" className="p-2 border border-gray-200 rounded-full hover:bg-black hover:text-white hover:border-black transition-all">
-                 <Linkedin className="w-5 h-5" />
+                 <Linkedin className="w-4 h-4" />
                </a>
                <a href="#" className="p-2 border border-gray-200 rounded-full hover:bg-black hover:text-white hover:border-black transition-all">
-                 <Twitter className="w-5 h-5" />
+                 <Twitter className="w-4 h-4" />
                </a>
             </div>
           </div>
 
           {/* Sitemap Column */}
-          <div className="md:col-span-3 md:col-start-10 flex flex-col gap-6">
+          <div className="md:col-span-2 md:col-start-12 flex flex-col gap-6">
             <h4 className="text-sm font-semibold text-gray-900 uppercase tracking-widest">Sitemap</h4>
             <div className="flex flex-col gap-3">
               {links.map((link) => (
-                <Link key={link.name} href={link.href} className="text-base text-gray-500 hover:text-black transition-colors font-light">
+                <Link key={link.name} href={link.href}>
+                  <a className="text-base text-gray-500 hover:text-black transition-colors font-light">
                     {link.name}
+                  </a>
                 </Link>
               ))}
             </div>
