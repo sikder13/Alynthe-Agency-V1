@@ -1,0 +1,77 @@
+Task: Create the "About" Page (app/about/page.tsx).
+
+Design Reference: Minimalist, Grid-Based, Swiss Typography. Constraint: NO BUTTONS on this page.
+
+1. Page Architecture:
+
+Background: Use the "Subtle Aurora" (faint moving gradient) to keep it consistent with the brand.
+
+Layout: Vertical stack of 3 distinct sections.
+
+2. Section 1: The Origin (Based on screenshot 1.2):
+
+Layout: Simple split or centered text.
+
+Headline: "About Alynthe."
+
+Copy: "We built this agency to prove that exceptional work doesn't require exceptional budgets. We bridge the gap between manual chaos and digital order. Quality and scalability aren't enemies; they are partners."
+
+Styling: Large, elegant serif or sans-serif header. text-neutral-900.
+
+3. Section 2: The Philosophy (Based on screenshot 1.3):
+
+Layout: Two Columns (grid-cols-1 lg:grid-cols-2).
+
+Left Column (Text Stack):
+
+Item 1 (Who we are): "Builders, not just designers. We construct engines for growth."
+
+Item 2 (What we believe): "Transparency is currency. Results matter more than jargon. Your growth is our only KPI."
+
+Item 3 (How we work): "Strategy first. We listen before we code. Every pixel traces back to a business goal."
+
+Icons: Use simple Lucide icons (Users, Scale, Cpu) for each point.
+
+Right Column (Visual):
+
+Instead of a grey box, place a Softly Glowing Abstract Shape.
+
+Use a div with bg-gradient-to-tr from-indigo-200 to-purple-200 and blur-3xl.
+
+Animate it "breathing" (scaling up/down slightly) to symbolize a living system.
+
+4. Section 3: The Architects (Based on screenshot 1.4):
+
+Headline: "The Architects." (Subtext: "The minds behind the machine.")
+
+Layout: Two Columns (Founders).
+
+Card Design:
+
+Visual: A square div placeholder (bg-neutral-100 aspect-square rounded-lg). Note: We will add photos later.
+
+Name: Bold, larger text.
+
+Role: Small, uppercase tracking (text-xs text-neutral-500).
+
+Bio: 2 lines of high-level copy.
+
+Founder Data:
+
+Card 1:
+
+Name: Shadman Khan
+
+Role: FOUNDER & CEO
+
+Bio: "The strategist. He bridges the gap between business vision and digital infrastructure, ensuring every system scales revenue."
+
+Card 2:
+
+Name: Udaay Sikder
+
+Role: FOUNDER & AI CONSULTANT
+
+Bio: "The engineer. He architects the intelligent agents and logic flows that power our automation, turning data into action."
+
+Output: The full code for app/about/page.tsx.

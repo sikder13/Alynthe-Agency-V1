@@ -7,6 +7,7 @@ import { ScrollManager } from "@/components/ScrollManager";
 import Home from "@/pages/Home";
 import Services from "@/pages/Services";
 import UseCases from "@/pages/UseCases";
+import About from "@/pages/About";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -15,6 +16,7 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/services" component={Services} />
       <Route path="/use-cases" component={UseCases} />
+      <Route path="/about" component={About} />
       <Route component={NotFound} />
     </Switch>
   );
