@@ -19,14 +19,12 @@ export default function Navbar() {
       <div className="container mx-auto px-6 md:px-12 flex justify-between items-center w-full">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-4 group cursor-pointer hover:opacity-80 transition-opacity">
-          <div className="w-10 h-10 border-[1.5px] border-black relative flex items-center justify-center overflow-hidden bg-white">
-            {/* Cross (+) */}
-            <div className="absolute w-full h-[1.5px] bg-black" />
-            <div className="absolute h-full w-[1.5px] bg-black" />
-            {/* Diagonal (X) */}
-            <div className="absolute w-[141%] h-[1.5px] bg-black rotate-45" />
-            <div className="absolute w-[141%] h-[1.5px] bg-black -rotate-45" />
-          </div>
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-10 h-10 border-[1.5px] border-black bg-white">
+            <path d="M20 0V40" stroke="black" strokeWidth="1.5"/>
+            <path d="M0 20H40" stroke="black" strokeWidth="1.5"/>
+            <path d="M0 0L40 40" stroke="black" strokeWidth="1.5"/>
+            <path d="M40 0L0 40" stroke="black" strokeWidth="1.5"/>
+          </svg>
           <span className="font-light tracking-tight text-xl text-black">ALYNTHE</span>
         </Link>
 
