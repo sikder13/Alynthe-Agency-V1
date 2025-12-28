@@ -248,25 +248,44 @@ export async function registerRoutes(
   app.post("/api/leads", async (req, res) => {
     try {
       const validated = insertLeadSchema.parse(req.body);
-      const lead = await storage.createLead(validated);
-      
       const isFromChatbot = validated.projectType === "Chat Inquiry";
+      const source = isFromChatbot ? "Sarah Agent" : "Contact Form";
       
-      if (isFromChatbot) {
-        sendSarahSessionEmail(validated.name, validated.email);
-      } else {
-        sendContactFormEmails({
-          name: validated.name,
-          email: validated.email,
-          projectType: validated.projectType,
-          challenge: validated.challenge
-        });
+      // Run DB insert and email sending in parallel
+      const results = await Promise.allSettled([
+        // Database insert
+        storage.createLead(validated).then(lead => {
+          console.log(`Lead saved to DB: ${validated.email} | Source: ${source}`);
+          return lead;
+        }),
+        // Email sending (different based on source)
+        isFromChatbot 
+          ? sendSarahSessionEmail(validated.name, validated.email)
+          : sendContactFormEmails({
+              name: validated.name,
+              email: validated.email,
+              projectType: validated.projectType,
+              challenge: validated.challenge
+            })
+      ]);
+
+      // Check if DB insert succeeded
+      const dbResult = results[0];
+      if (dbResult.status === 'rejected') {
+        console.error("Failed to save lead to DB:", dbResult.reason);
+        throw dbResult.reason;
+      }
+
+      // Log email status (but don't fail the request if email fails)
+      const emailResult = results[1];
+      if (emailResult.status === 'rejected') {
+        console.error("Email send failed (non-blocking):", emailResult.reason);
       }
       
       res.status(201).json({
         success: true,
         message: "Lead created successfully",
-        data: lead
+        data: dbResult.value
       });
     } catch (error: any) {
       if (error.name === "ZodError") {
