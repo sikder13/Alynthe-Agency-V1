@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { Chatbot } from "@/components/ui/Chatbot";
@@ -13,6 +14,27 @@ interface ArticleLayoutProps {
 }
 
 export default function ArticleLayout({ children, title, excerpt, date, tag }: ArticleLayoutProps) {
+  useEffect(() => {
+    const originalTitle = document.title;
+    document.title = `${title} | Alynthe`;
+    
+    const metaDesc = document.querySelector('meta[name="description"]');
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    const ogDesc = document.querySelector('meta[property="og:description"]');
+    const twitterTitle = document.querySelector('meta[name="twitter:title"]');
+    const twitterDesc = document.querySelector('meta[name="twitter:description"]');
+    
+    if (metaDesc) metaDesc.setAttribute('content', excerpt);
+    if (ogTitle) ogTitle.setAttribute('content', `${title} | Alynthe`);
+    if (ogDesc) ogDesc.setAttribute('content', excerpt);
+    if (twitterTitle) twitterTitle.setAttribute('content', `${title} | Alynthe`);
+    if (twitterDesc) twitterDesc.setAttribute('content', excerpt);
+    
+    return () => {
+      document.title = originalTitle;
+    };
+  }, [title, excerpt]);
+
   return (
     <div className="min-h-screen bg-white font-sans text-gray-900 selection:bg-blue-100 selection:text-blue-900 relative overflow-hidden">
       {/* Background Subtle */}
