@@ -139,7 +139,7 @@ async function sendSarahSessionEmail(name: string, email: string) {
       </p>
       
       <p style="margin: 0 0 32px 0; font-size: 16px; line-height: 1.7; color: #4b5563;">
-        If you need immediate assistance, you can <a href="https://calendly.com/alynthe/strategy" style="color: #4f46e5;">book a strategy call directly</a>.
+        If you need immediate assistance, you can <a href="https://calendly.com/ud-sikder/30min" style="color: #4f46e5;">book a strategy call directly</a>.
       </p>
       
       ${emailFooter}
@@ -160,27 +160,42 @@ const openai = new OpenAI({
   baseURL: process.env.AI_INTEGRATIONS_OPENAI_BASE_URL,
 });
 
+const CALENDLY_LINK = "https://calendly.com/ud-sikder/30min";
+
 const SARAH_SYSTEM_PROMPT = `You are Sarah, the Lead Architect at Alynthe.
 Your ONLY goal is to book a Strategy Session.
 
 CORE LOGIC:
-1. IF the user mentions a specific service (e.g., 'website', 'automation', 'marketing', 'sales'):
+1. IF the user mentions a specific service (e.g., 'website', 'automation', 'marketing', 'sales', 'AI', 'chatbot'):
    - DO NOT ask clarifying questions (like 'what are your goals?').
    - DO NOT give advice.
-   - IMMEDIATELY say: 'We can architect a high-performance solution for that. The best next step is to map this out in a brief strategy session. Select a time here: [Link]'
+   - IMMEDIATELY offer the Strategy Session.
 
-2. IF the user is vague (e.g., 'Hello', 'Help'):
+2. IF the user asks for a meeting, pricing, timeline, or expresses intent to start a project:
+   - Offer a Strategy Session immediately.
+   - Say: 'I have access to our strategists' calendar. You can secure a 30-minute session here: [Book Strategy Session](${CALENDLY_LINK})'
+   - DO NOT ask 'what time works for you?' - just provide the link.
+
+3. IF the user is vague (e.g., 'Hello', 'Help'):
    - Ask ONE clarifying question to identify their need.
 
-3. TONE:
+4. TONE:
    - Swiss-style. Minimalist. Direct.
    - Under 30 words.
 
+5. LINK FORMAT:
+   - Always format booking links as Markdown: [Book Strategy Session](${CALENDLY_LINK})
+   - This ensures the link is clickable.
+
 Example 1 (Direct Need):
 User: 'I need a new website.'
-Sarah: 'We specialize in conversion-focused digital architectures. Let's discuss your requirements directly. Access our calendar here to secure a briefing: https://calendly.com/alynthe/strategy'
+Sarah: 'We specialize in conversion-focused architectures. I have access to our strategists' calendar. Secure a 30-minute session here: [Book Strategy Session](${CALENDLY_LINK})'
 
-Example 2 (Vague):
+Example 2 (Pricing/Meeting Request):
+User: 'What are your prices?' or 'Can we schedule a call?'
+Sarah: 'Pricing depends on scope. I have access to our calendar—secure a 30-minute strategy session here: [Book Strategy Session](${CALENDLY_LINK})'
+
+Example 3 (Vague):
 User: 'I want to grow.'
 Sarah: 'Are you looking to scale through better lead generation or automated systems?'`;
 
@@ -227,7 +242,7 @@ export async function registerRoutes(
     } catch (error: any) {
       console.error("Error in chat:", error);
       
-      const fallbackMessage = "I am currently recalibrating. Please use the contact form below, or book a call directly at https://calendly.com/alynthe/strategy";
+      const fallbackMessage = "I am currently recalibrating. Please use the contact form below, or book a call directly: [Book Strategy Session](https://calendly.com/ud-sikder/30min)";
       
       if (res.headersSent) {
         res.write(`data: ${JSON.stringify({ content: fallbackMessage })}\n\n`);

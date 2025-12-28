@@ -14,28 +14,35 @@ type LeadData = {
 };
 
 function parseMessageContent(text: string): React.ReactNode {
-  const bookingPattern = /\[BOOK_BRIEFING\]\((https?:\/\/[^\)]+)\)/g;
+  // Match markdown links: [Link Text](url)
+  const linkPattern = /\[([^\]]+)\]\((https?:\/\/[^\)]+)\)/g;
   const parts: React.ReactNode[] = [];
   let lastIndex = 0;
   let match;
 
-  while ((match = bookingPattern.exec(text)) !== null) {
+  while ((match = linkPattern.exec(text)) !== null) {
     if (match.index > lastIndex) {
       parts.push(text.slice(lastIndex, match.index));
     }
     
-    const url = match[1];
+    const linkText = match[1];
+    const url = match[2];
+    const isBookingLink = url.includes('calendly.com');
+    
     parts.push(
       <a
         key={match.index}
         href={url}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center gap-2 mt-3 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium rounded-lg transition-colors"
-        data-testid="button-book-briefing"
+        className={isBookingLink 
+          ? "inline-flex items-center gap-2 mt-3 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium rounded-lg transition-colors"
+          : "text-indigo-600 hover:text-indigo-800 underline"
+        }
+        data-testid={isBookingLink ? "button-book-session" : "link-external"}
       >
-        <Calendar className="w-4 h-4" />
-        Book Briefing
+        {isBookingLink && <Calendar className="w-4 h-4" />}
+        {linkText}
       </a>
     );
     lastIndex = match.index + match[0].length;
