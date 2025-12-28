@@ -388,8 +388,15 @@ export function Chatbot() {
             <X className="w-6 h-6 text-white" />
           ) : (
             <div className="relative">
-              <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full border-2 border-white"></div>
-               <MessageCircle className="w-6 h-6 text-black" />
+              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
+                <span className="text-white text-xs font-bold">S</span>
+              </div>
+              <div className="absolute -top-0.5 -right-0.5">
+                <span className="relative flex h-3 w-3">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500 border-2 border-white"></span>
+                </span>
+              </div>
             </div>
           )}
         </button>
