@@ -8,13 +8,21 @@ import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-async function sendWelcomeEmail(name: string, email: string) {
-  try {
-    await resend.emails.send({
-      from: "Alynthe <onboarding@resend.dev>",
-      to: email,
-      subject: "Transmission Received: Welcome to Alynthe.",
-      html: `
+const EMAIL_FROM = "Alynthe AI <no-reply@alynthe.com>";
+const ADMIN_EMAIL = "alyntheinfo@gmail.com";
+const REPLY_TO = "info@alynthe.com";
+
+const emailFooter = `
+  <div style="border-top: 1px solid #e5e7eb; padding-top: 32px; margin-top: 32px;">
+    <p style="margin: 0; font-size: 14px; color: #9ca3af; line-height: 1.6;">
+      <strong style="color: #111827;">Alynthe</strong> | The Infrastructure of Growth<br>
+      1438 Spann Ave, Indianapolis, IN 46203
+    </p>
+  </div>
+`;
+
+async function sendContactFormEmails(lead: { name: string; email: string; projectType?: string; challenge?: string }) {
+  const welcomeEmailHtml = `
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,7 +37,7 @@ async function sendWelcomeEmail(name: string, email: string) {
       </h1>
       
       <p style="margin: 0 0 20px 0; font-size: 16px; line-height: 1.7; color: #4b5563;">
-        Hello ${name},
+        Hello ${lead.name},
       </p>
       
       <p style="margin: 0 0 20px 0; font-size: 16px; line-height: 1.7; color: #4b5563;">
@@ -44,21 +52,106 @@ async function sendWelcomeEmail(name: string, email: string) {
         A Strategist will review your brief and deploy a response within <strong>24 hours</strong>.
       </p>
       
-      <div style="border-top: 1px solid #e5e7eb; padding-top: 32px; margin-top: 32px;">
-        <p style="margin: 0; font-size: 14px; color: #9ca3af; line-height: 1.6;">
-          <strong style="color: #111827;">Alynthe</strong> | The Infrastructure of Growth<br>
-          1438 Spann Ave, Indianapolis, IN 46203
-        </p>
-      </div>
+      ${emailFooter}
+    </div>
+  </div>
+</body>
+</html>
+  `;
+
+  const adminEmailHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+</head>
+<body style="margin: 0; padding: 20px; font-family: monospace; background-color: #111; color: #0f0;">
+  <h2 style="color: #0f0; margin-bottom: 20px;">NEW LEAD CAPTURED</h2>
+  <pre style="background: #222; padding: 20px; border-radius: 4px; overflow-x: auto;">
+Name: ${lead.name}
+Email: ${lead.email}
+Project Type: ${lead.projectType || 'Not specified'}
+Challenge: ${lead.challenge || 'Not specified'}
+Source: Contact Form
+Timestamp: ${new Date().toISOString()}
+  </pre>
+</body>
+</html>
+  `;
+
+  const results = await Promise.allSettled([
+    resend.emails.send({
+      from: EMAIL_FROM,
+      to: lead.email,
+      replyTo: REPLY_TO,
+      subject: "Transmission Received: Welcome to Alynthe.",
+      html: welcomeEmailHtml
+    }),
+    resend.emails.send({
+      from: EMAIL_FROM,
+      to: ADMIN_EMAIL,
+      subject: `New Lead: ${lead.name}`,
+      html: adminEmailHtml
+    })
+  ]);
+
+  results.forEach((result, index) => {
+    const target = index === 0 ? lead.email : ADMIN_EMAIL;
+    if (result.status === 'fulfilled') {
+      console.log(`Email sent successfully to ${target}`);
+    } else {
+      console.error(`Failed to send email to ${target}:`, result.reason);
+    }
+  });
+}
+
+async function sendSarahSessionEmail(name: string, email: string) {
+  try {
+    await resend.emails.send({
+      from: EMAIL_FROM,
+      to: email,
+      replyTo: REPLY_TO,
+      subject: "Your Session with Sarah (Alynthe AI)",
+      html: `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #fafafa;">
+  <div style="max-width: 600px; margin: 0 auto; padding: 40px 20px;">
+    <div style="background-color: #ffffff; border-radius: 8px; padding: 48px; border: 1px solid #e5e7eb;">
+      <h1 style="margin: 0 0 24px 0; font-size: 28px; font-weight: 600; color: #111827; letter-spacing: -0.5px;">
+        Session Logged
+      </h1>
+      
+      <p style="margin: 0 0 20px 0; font-size: 16px; line-height: 1.7; color: #4b5563;">
+        Hello ${name},
+      </p>
+      
+      <p style="margin: 0 0 20px 0; font-size: 16px; line-height: 1.7; color: #4b5563;">
+        Sarah has logged your request. A human strategist will review the chat logs and deploy a strategy within <strong>24 hours</strong>.
+      </p>
+      
+      <p style="margin: 0 0 20px 0; font-size: 16px; line-height: 1.7; color: #4b5563;">
+        We are not a faceless offshore firm. We are proud to be an <strong>American-built agency</strong>, engineered right here in the Midwest (Indianapolis). We believe in hard work & honesty.
+      </p>
+      
+      <p style="margin: 0 0 32px 0; font-size: 16px; line-height: 1.7; color: #4b5563;">
+        If you need immediate assistance, you can <a href="https://calendly.com/alynthe/strategy" style="color: #4f46e5;">book a strategy call directly</a>.
+      </p>
+      
+      ${emailFooter}
     </div>
   </div>
 </body>
 </html>
       `
     });
-    console.log(`Welcome email sent to ${email}`);
+    console.log(`Sarah session email sent to ${email}`);
   } catch (error) {
-    console.error("Failed to send welcome email:", error);
+    console.error("Failed to send Sarah session email:", error);
   }
 }
 
@@ -151,14 +244,24 @@ export async function registerRoutes(
     }
   });
 
-  // POST /api/leads - Create a new lead from contact form
+  // POST /api/leads - Create a new lead from contact form or chatbot
   app.post("/api/leads", async (req, res) => {
     try {
       const validated = insertLeadSchema.parse(req.body);
       const lead = await storage.createLead(validated);
       
-      // Send welcome email asynchronously (don't block the response)
-      sendWelcomeEmail(validated.name, validated.email);
+      const isFromChatbot = validated.projectType === "Chat Inquiry";
+      
+      if (isFromChatbot) {
+        sendSarahSessionEmail(validated.name, validated.email);
+      } else {
+        sendContactFormEmails({
+          name: validated.name,
+          email: validated.email,
+          projectType: validated.projectType,
+          challenge: validated.challenge
+        });
+      }
       
       res.status(201).json({
         success: true,
