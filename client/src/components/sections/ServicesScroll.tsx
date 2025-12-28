@@ -251,7 +251,7 @@ export function ServicesScroll() {
                   }}
                   transition={{ duration: 0.5, ease: "easeOut" }}
                 >
-                  <h2 className="text-5xl lg:text-6xl font-light text-gray-900 mb-8 tracking-tight">
+                  <h2 className="text-3xl sm:text-5xl lg:text-6xl font-light text-gray-900 mb-8 tracking-tight">
                     {service.title}
                   </h2>
                   <p className="text-xl text-gray-500 font-light leading-relaxed max-w-md">

@@ -55,8 +55,23 @@
   * {
     @apply border-border;
   }
+  html, body {
+    @apply overflow-x-hidden;
+  }
   body {
     @apply font-sans antialiased bg-background text-foreground;
+  }
+  /* Safe area spacing for mobile */
+  main {
+    @apply px-4 sm:px-6 lg:px-0;
+  }
+  /* Minimum tap target for accessibility */
+  button, a[role="button"], .btn {
+    @apply min-h-[44px];
+  }
+  /* Prevent word breaking on headers */
+  h1, h2, h3 {
+    @apply break-words;
   }
 }
 

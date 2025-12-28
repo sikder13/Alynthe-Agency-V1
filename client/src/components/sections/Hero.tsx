@@ -62,7 +62,7 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, ease: "easeOut" }}
         >
-          <h1 className="text-6xl md:text-8xl lg:text-9xl font-light tracking-tighter leading-[0.95] text-neutral-900 mb-8">
+          <h1 className="text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-light tracking-tighter leading-[0.95] text-neutral-900 mb-8">
             The Infrastructure<br />
             of Growth.
           </h1>

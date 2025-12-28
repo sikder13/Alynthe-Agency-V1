@@ -95,7 +95,7 @@ export default function Contact() {
               className="flex flex-col justify-between"
             >
               <div>
-                <h1 className="text-5xl md:text-6xl font-light tracking-tight text-gray-900 mb-8 leading-tight">
+                <h1 className="text-3xl sm:text-5xl md:text-6xl font-light tracking-tight text-gray-900 mb-8 leading-tight">
                   Start the <br />
                   <span className="font-medium">Transformation.</span>
                 </h1>

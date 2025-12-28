@@ -80,7 +80,7 @@ export default function UseCases() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <h1 className="text-5xl md:text-7xl font-light tracking-tight text-gray-900 mb-6">
+              <h1 className="text-3xl sm:text-5xl md:text-7xl font-light tracking-tight text-gray-900 mb-6">
                 Real-World Impact.
               </h1>
               <p className="text-xl md:text-2xl font-light text-gray-500 tracking-wide max-w-2xl">

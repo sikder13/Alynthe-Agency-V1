@@ -54,7 +54,7 @@ export function FAQ() {
         
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
-          <h2 className="text-5xl md:text-7xl font-light text-gray-900 tracking-tight max-w-3xl">
+          <h2 className="text-3xl sm:text-5xl md:text-7xl font-light text-gray-900 tracking-tight max-w-3xl">
             Ready to grow your business?
           </h2>
           <div className="flex gap-4">
