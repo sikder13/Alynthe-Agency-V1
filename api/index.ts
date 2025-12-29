@@ -1,5 +1,5 @@
-// api/index.ts
-import { app, setupApp } from "../server/index.ts";
+// NOTE: We use .js extension because Vercel/Node ESM requires it at runtime
+import app, { setupApp } from "../server/index.js";
 
 // Initialize routes once
 const setupPromise = setupApp();

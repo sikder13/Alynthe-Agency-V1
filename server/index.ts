@@ -98,7 +98,9 @@ if (process.env.NODE_ENV !== "production" || !process.env.VERCEL) {
   })();
 }
 
-// Export the app for Vercel
+// ... (rest of your code)
+
+// Export the app for Vercel (Named AND Default)
+export { app };
 export default app;
-// Export the setup function in case the Vercel handler needs to await it
 export { setupApp };
