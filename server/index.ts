@@ -1,7 +1,18 @@
+/*
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { serveStatic } from "./static";
 import { createServer } from "http";
+*/
+
+// AFTER (Add .js):
+import express, { type Request, Response, NextFunction } from "express";
+// @ts-ignore
+import { registerRoutes } from "./routes.js";
+// @ts-ignore
+import { serveStatic } from "./static.js";
+// @ts-ignore
+import { setupVite } from "./vite.js";
 
 const app = express();
 // Export the httpServer so we can use it if needed, though Vercel mainly uses 'app'

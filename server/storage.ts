@@ -1,5 +1,12 @@
-import { type User, type InsertUser, type Lead, type InsertLead, users, leads } from "@shared/schema";
-import { db } from "./db";
+import {
+  type User,
+  type InsertUser,
+  type Lead,
+  type InsertLead,
+  users,
+  leads,
+} from "../shared/schema.js";
+import { db } from "./db.js";
 import { eq } from "drizzle-orm";
 
 export interface IStorage {
@@ -12,12 +19,20 @@ export interface IStorage {
 
 export class DatabaseStorage implements IStorage {
   async getUser(id: string): Promise<User | undefined> {
-    const result = await db.select().from(users).where(eq(users.id, id)).limit(1);
+    const result = await db
+      .select()
+      .from(users)
+      .where(eq(users.id, id))
+      .limit(1);
     return result[0];
   }
 
   async getUserByUsername(username: string): Promise<User | undefined> {
-    const result = await db.select().from(users).where(eq(users.username, username)).limit(1);
+    const result = await db
+      .select()
+      .from(users)
+      .where(eq(users.username, username))
+      .limit(1);
     return result[0];
   }
 
