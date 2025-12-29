@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { Chatbot } from "@/components/ui/Chatbot";
@@ -41,6 +42,10 @@ const articles = [
 ];
 
 export default function BlogIndex() {
+  useEffect(() => {
+    document.title = "Insights | Alynthe";
+  }, []);
+
   return (
     <div className="min-h-screen bg-white font-sans text-gray-900 selection:bg-blue-100 selection:text-blue-900 relative overflow-hidden">
       {/* Background Subtle */}

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { ServicesScroll } from "@/components/sections/ServicesScroll";
@@ -5,6 +6,10 @@ import { Chatbot } from "@/components/ui/Chatbot";
 import { motion } from "framer-motion";
 
 export default function Services() {
+  useEffect(() => {
+    document.title = "Services | Alynthe";
+  }, []);
+
   return (
     <div className="min-h-screen bg-white font-sans text-gray-900 selection:bg-blue-100 selection:text-blue-900 relative">
       {/* Aurora Atmosphere - Fixed Background */}

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { Chatbot } from "@/components/ui/Chatbot";
@@ -5,6 +6,10 @@ import { motion } from "framer-motion";
 import { Users, Scale, Cpu } from "lucide-react";
 
 export default function About() {
+  useEffect(() => {
+    document.title = "About | Alynthe";
+  }, []);
+
   return (
     <div className="min-h-screen bg-white font-sans text-gray-900 selection:bg-blue-100 selection:text-blue-900 relative overflow-hidden">
       {/* Aurora Atmosphere - Fixed Background */}
