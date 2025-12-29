@@ -6,6 +6,7 @@ import { Impact } from "@/components/sections/Impact";
 import { FAQ } from "@/components/sections/FAQ";
 import { Chatbot } from "@/components/ui/Chatbot";
 import { useSEO } from "@/hooks/useSEO";
+import { SchemaMarkup } from "@/components/SchemaMarkup";
 
 export default function Home() {
   useSEO({
@@ -18,6 +19,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-white font-sans text-gray-900 selection:bg-blue-100 selection:text-blue-900">
+      <SchemaMarkup type="home" />
       <Navbar />
       <main>
         <Hero />
