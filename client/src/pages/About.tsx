@@ -163,8 +163,10 @@ export default function About() {
               >
                 <div className="bg-neutral-100 aspect-square rounded-lg mb-6 overflow-hidden transition-all duration-500 group-hover:shadow-lg group-hover:bg-neutral-200 relative">
                   <img
-                    src="/team/shadman.jpeg"
+                    src="/team/shadman.webp"
                     alt="Shadman Khan"
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-500"
                   />
                 </div>
@@ -187,8 +189,10 @@ export default function About() {
               >
                 <div className="bg-neutral-100 aspect-square rounded-lg mb-6 overflow-hidden transition-all duration-500 group-hover:shadow-lg group-hover:bg-neutral-200 relative">
                   <img
-                    src="/team/udaay.jpeg"
+                    src="/team/udaay.webp"
                     alt="Udaay Sikder"
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-500"
                   />
                 </div>

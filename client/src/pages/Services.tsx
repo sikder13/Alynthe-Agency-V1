@@ -16,10 +16,11 @@ export default function Services() {
 
   return (
     <div className="min-h-screen bg-white font-sans text-gray-900 selection:bg-blue-100 selection:text-blue-900 relative">
-      {/* Aurora Atmosphere - Fixed Background */}
+      {/* Aurora Atmosphere - Fixed Background (GPU Accelerated) */}
       <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
         <motion.div
-          className="absolute top-[10%] left-[10%] w-[60vw] h-[60vw] bg-indigo-100/40 rounded-full mix-blend-multiply filter blur-[100px]"
+          className="absolute top-[10%] left-[10%] w-[60vw] h-[60vw] bg-indigo-100/40 rounded-full mix-blend-multiply filter blur-[60px] md:blur-[100px]"
+          style={{ willChange: "transform" }}
           animate={{
             x: [-20, 20, -10, -20],
             y: [-10, 10, -20, -10],
@@ -33,7 +34,8 @@ export default function Services() {
           }}
         />
         <motion.div
-          className="absolute bottom-[20%] right-[10%] w-[60vw] h-[60vw] bg-purple-100/40 rounded-full mix-blend-multiply filter blur-[100px]"
+          className="hidden md:block absolute bottom-[20%] right-[10%] w-[60vw] h-[60vw] bg-purple-100/40 rounded-full mix-blend-multiply filter blur-[100px]"
+          style={{ willChange: "transform" }}
           animate={{
             x: [20, -20, 10, 20],
             y: [10, -10, 20, 10],

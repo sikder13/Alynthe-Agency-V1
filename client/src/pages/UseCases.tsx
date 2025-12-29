@@ -46,10 +46,11 @@ export default function UseCases() {
 
   return (
     <div className="min-h-screen bg-white font-sans text-gray-900 selection:bg-blue-100 selection:text-blue-900 relative overflow-hidden">
-      {/* Aurora Atmosphere - Fixed Background */}
+      {/* Aurora Atmosphere - Fixed Background (GPU Accelerated) */}
       <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
         <motion.div
-          className="absolute top-[10%] left-[10%] w-[60vw] h-[60vw] bg-indigo-300/20 rounded-full mix-blend-multiply filter blur-[120px]"
+          className="absolute top-[10%] left-[10%] w-[60vw] h-[60vw] bg-indigo-300/20 rounded-full mix-blend-multiply filter blur-[80px] md:blur-[120px]"
+          style={{ willChange: "transform" }}
           animate={{
             x: [-20, 20, -10, -20],
             y: [-10, 10, -20, -10],
@@ -63,7 +64,8 @@ export default function UseCases() {
           }}
         />
         <motion.div
-          className="absolute bottom-[20%] right-[10%] w-[60vw] h-[60vw] bg-purple-300/20 rounded-full mix-blend-multiply filter blur-[120px]"
+          className="hidden md:block absolute bottom-[20%] right-[10%] w-[60vw] h-[60vw] bg-purple-300/20 rounded-full mix-blend-multiply filter blur-[120px]"
+          style={{ willChange: "transform" }}
           animate={{
             x: [20, -20, 10, 20],
             y: [10, -10, 20, 10],

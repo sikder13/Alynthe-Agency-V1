@@ -3,11 +3,12 @@ import { motion } from "framer-motion";
 export function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 bg-[#FAFAFA]">
-      {/* Moving Mesh Gradient Background - Orbs */}
+      {/* Moving Mesh Gradient Background - Orbs (GPU Accelerated) */}
       <div className="absolute inset-0 z-0 overflow-hidden">
-        {/* Orb 1: Indigo - Stronger Color */}
+        {/* Orb 1: Indigo */}
         <motion.div
-          className="absolute top-[20%] left-[20%] w-[45vw] h-[45vw] bg-indigo-400/30 rounded-full mix-blend-multiply filter blur-[120px]"
+          className="absolute top-[20%] left-[20%] w-[45vw] h-[45vw] md:w-[45vw] md:h-[45vw] bg-indigo-400/30 rounded-full mix-blend-multiply filter blur-[80px] md:blur-[120px]"
+          style={{ willChange: "transform" }}
           animate={{
             x: [-50, 50, -20, -50],
             y: [-30, 30, -50, -30],
@@ -20,9 +21,10 @@ export function Hero() {
             ease: "easeInOut",
           }}
         />
-        {/* Orb 2: Purple - Stronger Color */}
+        {/* Orb 2: Purple - Hidden on mobile for performance */}
         <motion.div
-          className="absolute top-[15%] right-[15%] w-[50vw] h-[50vw] bg-purple-400/30 rounded-full mix-blend-multiply filter blur-[120px]"
+          className="hidden md:block absolute top-[15%] right-[15%] w-[50vw] h-[50vw] bg-purple-400/30 rounded-full mix-blend-multiply filter blur-[120px]"
+          style={{ willChange: "transform" }}
           animate={{
             x: [50, -50, 30, 50],
             y: [40, -40, 20, 40],
@@ -35,9 +37,10 @@ export function Hero() {
             ease: "easeInOut",
           }}
         />
-        {/* Orb 3: Blue - Stronger Color */}
+        {/* Orb 3: Blue - Static on mobile */}
         <motion.div
-          className="absolute bottom-[10%] left-[30%] w-[55vw] h-[55vw] bg-blue-400/30 rounded-full mix-blend-multiply filter blur-[120px]"
+          className="absolute bottom-[10%] left-[30%] w-[55vw] h-[55vw] md:w-[55vw] md:h-[55vw] bg-blue-400/30 rounded-full mix-blend-multiply filter blur-[80px] md:blur-[120px]"
+          style={{ willChange: "transform" }}
           animate={{
             x: [-30, 60, -40, -30],
             y: [30, -60, 40, 30],
