@@ -4,8 +4,11 @@ import { ServicesScroll } from "@/components/sections/ServicesScroll";
 import { Chatbot } from "@/components/ui/Chatbot";
 import { motion } from "framer-motion";
 import { useSEO } from "@/hooks/useSEO";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 export default function Services() {
+  const isMobile = useIsMobile();
+
   useSEO({
     title: "Digital Marketing & AI Automation Services | Alynthe Indianapolis",
     description: "Expert web development, AI marketing automation, and growth engine services in Indianapolis. We build scalable digital solutions for modern businesses.",
@@ -16,44 +19,46 @@ export default function Services() {
 
   return (
     <div className="min-h-screen bg-white font-sans text-gray-900 selection:bg-blue-100 selection:text-blue-900 relative">
-      {/* Aurora Atmosphere - Fixed Background (GPU Accelerated) */}
-      <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
-        <motion.div
-          className="absolute top-[10%] left-[10%] w-[60vw] h-[60vw] bg-indigo-100/40 rounded-full mix-blend-multiply filter blur-[60px] md:blur-[100px]"
-          style={{ willChange: "transform" }}
-          animate={{
-            x: [-20, 20, -10, -20],
-            y: [-10, 10, -20, -10],
-            scale: [1, 1.1, 0.9, 1],
-          }}
-          transition={{
-            duration: 15,
-            repeat: Infinity,
-            repeatType: "mirror",
-            ease: "easeInOut",
-          }}
-        />
-        <motion.div
-          className="hidden md:block absolute bottom-[20%] right-[10%] w-[60vw] h-[60vw] bg-purple-100/40 rounded-full mix-blend-multiply filter blur-[100px]"
-          style={{ willChange: "transform" }}
-          animate={{
-            x: [20, -20, 10, 20],
-            y: [10, -10, 20, 10],
-            scale: [1, 1.2, 0.8, 1],
-          }}
-          transition={{
-            duration: 18,
-            repeat: Infinity,
-            repeatType: "mirror",
-            ease: "easeInOut",
-          }}
-        />
-      </div>
+      {isMobile ? (
+        <div className="fixed inset-0 z-0 bg-gradient-to-br from-indigo-50/60 via-white to-purple-50/60 pointer-events-none" />
+      ) : (
+        <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+          <motion.div
+            className="absolute top-[10%] left-[10%] w-[60vw] h-[60vw] bg-indigo-100/40 rounded-full mix-blend-multiply filter blur-[100px]"
+            style={{ willChange: "transform" }}
+            animate={{
+              x: [-20, 20, -10, -20],
+              y: [-10, 10, -20, -10],
+              scale: [1, 1.1, 0.9, 1],
+            }}
+            transition={{
+              duration: 15,
+              repeat: Infinity,
+              repeatType: "mirror",
+              ease: "easeInOut",
+            }}
+          />
+          <motion.div
+            className="absolute bottom-[20%] right-[10%] w-[60vw] h-[60vw] bg-purple-100/40 rounded-full mix-blend-multiply filter blur-[100px]"
+            style={{ willChange: "transform" }}
+            animate={{
+              x: [20, -20, 10, 20],
+              y: [10, -10, 20, 10],
+              scale: [1, 1.2, 0.8, 1],
+            }}
+            transition={{
+              duration: 18,
+              repeat: Infinity,
+              repeatType: "mirror",
+              ease: "easeInOut",
+            }}
+          />
+        </div>
+      )}
 
       <div className="relative z-10">
         <Navbar />
         <main>
-          {/* Header Section */}
           <section className="pt-48 pb-24 px-6 md:px-12 container mx-auto text-center md:text-left">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -69,7 +74,6 @@ export default function Services() {
             </motion.div>
           </section>
 
-          {/* Scroll Section */}
           <ServicesScroll />
         </main>
         <Footer />

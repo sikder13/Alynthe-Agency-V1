@@ -23,7 +23,7 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100 h-20 flex items-center transition-all duration-300">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 md:bg-white/90 md:backdrop-blur-md border-b border-gray-100 h-20 flex items-center transition-all duration-300">
       <div className="container mx-auto px-6 md:px-12 flex justify-between items-center w-full">
         {/* Logo */}
         <Link href="/">
