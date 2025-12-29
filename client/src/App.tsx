@@ -1,34 +1,39 @@
+import { lazy, Suspense } from "react";
 import { Switch, Route } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ScrollManager } from "@/components/ScrollManager";
-import Home from "@/pages/Home";
-import Services from "@/pages/Services";
-import UseCases from "@/pages/UseCases";
-import About from "@/pages/About";
-import Contact from "@/pages/Contact";
-import BlogIndex from "@/pages/blog/Index";
-import AgencyDead from "@/pages/blog/AgencyDead";
-import SalesEngineBlueprint from "@/pages/blog/SalesEngineBlueprint";
-import ROISilence from "@/pages/blog/ROISilence";
-import NotFound from "@/pages/not-found";
+import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
+
+const Home = lazy(() => import("@/pages/Home"));
+const Services = lazy(() => import("@/pages/Services"));
+const UseCases = lazy(() => import("@/pages/UseCases"));
+const About = lazy(() => import("@/pages/About"));
+const Contact = lazy(() => import("@/pages/Contact"));
+const BlogIndex = lazy(() => import("@/pages/blog/Index"));
+const AgencyDead = lazy(() => import("@/pages/blog/AgencyDead"));
+const SalesEngineBlueprint = lazy(() => import("@/pages/blog/SalesEngineBlueprint"));
+const ROISilence = lazy(() => import("@/pages/blog/ROISilence"));
+const NotFound = lazy(() => import("@/pages/not-found"));
 
 function Router() {
   return (
-    <Switch>
-      <Route path="/" component={Home} />
-      <Route path="/services" component={Services} />
-      <Route path="/use-cases" component={UseCases} />
-      <Route path="/about" component={About} />
-      <Route path="/contact" component={Contact} />
-      <Route path="/blog" component={BlogIndex} />
-      <Route path="/blog/agency-dead" component={AgencyDead} />
-      <Route path="/blog/sales-engine-blueprint" component={SalesEngineBlueprint} />
-      <Route path="/blog/roi-of-silence" component={ROISilence} />
-      <Route component={NotFound} />
-    </Switch>
+    <Suspense fallback={<LoadingSpinner />}>
+      <Switch>
+        <Route path="/" component={Home} />
+        <Route path="/services" component={Services} />
+        <Route path="/use-cases" component={UseCases} />
+        <Route path="/about" component={About} />
+        <Route path="/contact" component={Contact} />
+        <Route path="/blog" component={BlogIndex} />
+        <Route path="/blog/agency-dead" component={AgencyDead} />
+        <Route path="/blog/sales-engine-blueprint" component={SalesEngineBlueprint} />
+        <Route path="/blog/roi-of-silence" component={ROISilence} />
+        <Route component={NotFound} />
+      </Switch>
+    </Suspense>
   );
 }
 
