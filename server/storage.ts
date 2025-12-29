@@ -1,3 +1,4 @@
+//@ts-ignore
 import {
   type User,
   type InsertUser,
@@ -6,6 +7,7 @@ import {
   users,
   leads,
 } from "../shared/schema.js";
+//@ts-ignore
 import { db } from "./db.js";
 import { eq } from "drizzle-orm";
 

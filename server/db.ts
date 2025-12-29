@@ -1,6 +1,8 @@
 import { drizzle } from "drizzle-orm/node-postgres";
 import pg from "pg";
-import * as schema from "../shared/schema.ts";
+// FIX: Must import as .js for Vercel Runtime
+// @ts-ignore
+import * as schema from "../shared/schema.js";
 
 const { Pool } = pg;
 
@@ -10,11 +12,10 @@ if (!process.env.DATABASE_URL) {
   );
 }
 
-// FIX: Added SSL configuration for Supabase/Vercel
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-  ssl: { rejectUnauthorized: false }, // Required for Supabase on Vercel
-  max: 10, // Optimization for Serverless
+  ssl: { rejectUnauthorized: false }, // Keep this SSL setting!
+  max: 10,
 });
 
 export const db = drizzle({ client: pool, schema });
