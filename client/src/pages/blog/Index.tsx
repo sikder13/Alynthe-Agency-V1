@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { Chatbot } from "@/components/ui/Chatbot";
@@ -7,6 +6,7 @@ import { PatternOverlay } from "@/components/ui/PatternOverlay";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
+import { useSEO } from "@/hooks/useSEO";
 
 const articles = [
   {
@@ -42,9 +42,12 @@ const articles = [
 ];
 
 export default function BlogIndex() {
-  useEffect(() => {
-    document.title = "Insights | Alynthe";
-  }, []);
+  useSEO({
+    title: "Insights | Digital Marketing & AI Strategy Blog | Alynthe",
+    description: "Expert insights on AI marketing automation, ROI optimization, and digital transformation strategies from the Alynthe team in Indianapolis.",
+    keywords: "digital marketing blog, AI automation insights, marketing ROI, Indianapolis marketing tips",
+    canonicalUrl: "https://alynthe.com/blog"
+  });
 
   return (
     <div className="min-h-screen bg-white font-sans text-gray-900 selection:bg-blue-100 selection:text-blue-900 relative overflow-hidden">

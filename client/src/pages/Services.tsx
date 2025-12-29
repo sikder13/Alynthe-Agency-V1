@@ -1,14 +1,18 @@
-import { useEffect } from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { ServicesScroll } from "@/components/sections/ServicesScroll";
 import { Chatbot } from "@/components/ui/Chatbot";
 import { motion } from "framer-motion";
+import { useSEO } from "@/hooks/useSEO";
 
 export default function Services() {
-  useEffect(() => {
-    document.title = "Services | Alynthe";
-  }, []);
+  useSEO({
+    title: "Digital Marketing & AI Automation Services | Alynthe Indianapolis",
+    description: "Expert web development, AI marketing automation, and growth engine services in Indianapolis. We build scalable digital solutions for modern businesses.",
+    keywords: "web design Indianapolis, marketing automation services, AI agents Indianapolis, CRM integration, sales funnel optimization, Indianapolis web development agency",
+    canonicalUrl: "https://alynthe.com/services",
+    ogImage: "https://alynthe.com/opengraph.jpg"
+  });
 
   return (
     <div className="min-h-screen bg-white font-sans text-gray-900 selection:bg-blue-100 selection:text-blue-900 relative">

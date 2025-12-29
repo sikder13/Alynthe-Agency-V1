@@ -1,14 +1,17 @@
-import { useEffect } from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { Chatbot } from "@/components/ui/Chatbot";
 import { motion } from "framer-motion";
 import { Users, Scale, Cpu } from "lucide-react";
+import { useSEO } from "@/hooks/useSEO";
 
 export default function About() {
-  useEffect(() => {
-    document.title = "About | Alynthe";
-  }, []);
+  useSEO({
+    title: "About Alynthe | Indianapolis Digital Marketing Agency",
+    description: "Meet the team behind Alynthe. We're an American-built agency in Indianapolis specializing in AI automation, web development, and digital transformation.",
+    keywords: "about Alynthe, Indianapolis marketing team, digital agency Indianapolis, AI automation experts",
+    canonicalUrl: "https://alynthe.com/about"
+  });
 
   return (
     <div className="min-h-screen bg-white font-sans text-gray-900 selection:bg-blue-100 selection:text-blue-900 relative overflow-hidden">

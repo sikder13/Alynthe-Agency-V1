@@ -1,15 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { Chatbot } from "@/components/ui/Chatbot";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, ArrowRight, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useSEO } from "@/hooks/useSEO";
 
 export default function Contact() {
-  useEffect(() => {
-    document.title = "Contact | Alynthe";
-  }, []);
+  useSEO({
+    title: "Contact Alynthe | Get a Free Strategy Session",
+    description: "Ready to transform your business? Contact Alynthe for a free strategy session. Indianapolis-based digital marketing and AI automation experts.",
+    keywords: "contact Alynthe, free consultation Indianapolis, digital marketing quote, AI automation consultation",
+    canonicalUrl: "https://alynthe.com/contact"
+  });
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({

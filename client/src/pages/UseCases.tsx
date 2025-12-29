@@ -1,9 +1,9 @@
-import { useEffect } from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { Chatbot } from "@/components/ui/Chatbot";
 import { UseCaseCard, VisualScenario1, VisualScenario2, VisualScenario3, VisualScenario4 } from "@/components/cards/UseCaseCard";
 import { motion } from "framer-motion";
+import { useSEO } from "@/hooks/useSEO";
 
 const cases = [
   {
@@ -37,9 +37,12 @@ const cases = [
 ];
 
 export default function UseCases() {
-  useEffect(() => {
-    document.title = "Use Cases | Alynthe";
-  }, []);
+  useSEO({
+    title: "Use Cases | AI & Marketing Automation Success Stories | Alynthe",
+    description: "See real-world examples of how Alynthe helps businesses automate lead capture, increase customer lifetime value, and build high-performance websites.",
+    keywords: "marketing automation case studies, AI automation examples, Indianapolis business automation, lead capture automation",
+    canonicalUrl: "https://alynthe.com/use-cases"
+  });
 
   return (
     <div className="min-h-screen bg-white font-sans text-gray-900 selection:bg-blue-100 selection:text-blue-900 relative overflow-hidden">
