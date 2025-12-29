@@ -4,7 +4,7 @@ import app, { setupApp } from "../server/index.js";
 // Initialize routes once
 const setupPromise = setupApp();
 
-export default async function handler(req, res) {
+export default async function handler(req: any, res: any) {
   // Ensure routes are registered before handling the request
   await setupPromise;
 
