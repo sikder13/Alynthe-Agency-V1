@@ -161,9 +161,16 @@ async function sendSarahSessionEmail(name: string, email: string) {
   }
 }
 
+/*
 const openai = new OpenAI({
   apiKey: process.env.AI_INTEGRATIONS_OPENAI_API_KEY,
   baseURL: process.env.AI_INTEGRATIONS_OPENAI_BASE_URL,
+});*/
+
+// FIX: Use standard Vercel environment variables
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY, // Changed from AI_INTEGRATIONS_...
+  // Removed baseURL so it goes directly to OpenAI, not Replit's proxy
 });
 
 const CALENDLY_LINK = "https://calendly.com/ud-sikder/30min";
