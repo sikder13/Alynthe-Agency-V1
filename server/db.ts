@@ -10,8 +10,11 @@ if (!process.env.DATABASE_URL) {
   );
 }
 
+// FIX: Added SSL configuration for Supabase/Vercel
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false }, // Required for Supabase on Vercel
+  max: 10, // Optimization for Serverless
 });
 
 export const db = drizzle({ client: pool, schema });
