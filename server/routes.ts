@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertLeadSchema } from "@shared/schema";
+import { insertLeadSchema } from "../shared/schema.ts";
 import { fromError } from "zod-validation-error";
 import OpenAI from "openai";
 import { Resend } from "resend";
@@ -21,7 +21,12 @@ const emailFooter = `
   </div>
 `;
 
-async function sendContactFormEmails(lead: { name: string; email: string; projectType?: string; challenge?: string }) {
+async function sendContactFormEmails(lead: {
+  name: string;
+  email: string;
+  projectType?: string;
+  challenge?: string;
+}) {
   const welcomeEmailHtml = `
 <!DOCTYPE html>
 <html>
@@ -70,8 +75,8 @@ async function sendContactFormEmails(lead: { name: string; email: string; projec
   <pre style="background: #222; padding: 20px; border-radius: 4px; overflow-x: auto;">
 Name: ${lead.name}
 Email: ${lead.email}
-Project Type: ${lead.projectType || 'Not specified'}
-Challenge: ${lead.challenge || 'Not specified'}
+Project Type: ${lead.projectType || "Not specified"}
+Challenge: ${lead.challenge || "Not specified"}
 Source: Contact Form
 Timestamp: ${new Date().toISOString()}
   </pre>
@@ -85,19 +90,19 @@ Timestamp: ${new Date().toISOString()}
       to: lead.email,
       replyTo: REPLY_TO,
       subject: "Transmission Received: Welcome to Alynthe.",
-      html: welcomeEmailHtml
+      html: welcomeEmailHtml,
     }),
     resend.emails.send({
       from: EMAIL_FROM,
       to: ADMIN_EMAIL,
       subject: `New Lead: ${lead.name}`,
-      html: adminEmailHtml
-    })
+      html: adminEmailHtml,
+    }),
   ]);
 
   results.forEach((result, index) => {
     const target = index === 0 ? lead.email : ADMIN_EMAIL;
-    if (result.status === 'fulfilled') {
+    if (result.status === "fulfilled") {
       console.log(`Email sent successfully to ${target}`);
     } else {
       console.error(`Failed to send email to ${target}:`, result.reason);
@@ -147,7 +152,7 @@ async function sendSarahSessionEmail(name: string, email: string) {
   </div>
 </body>
 </html>
-      `
+      `,
     });
     console.log(`Sarah session email sent to ${email}`);
   } catch (error) {
@@ -201,7 +206,7 @@ Sarah: 'Are you looking to scale through better lead generation or automated sys
 
 export async function registerRoutes(
   httpServer: Server,
-  app: Express
+  app: Express,
 ): Promise<Server> {
   // POST /api/chat - Sarah AI chatbot endpoint with streaming
   app.post("/api/chat", async (req, res) => {
@@ -216,16 +221,13 @@ export async function registerRoutes(
       res.setHeader("Cache-Control", "no-cache");
       res.setHeader("Connection", "keep-alive");
 
-      const systemPrompt = userName 
+      const systemPrompt = userName
         ? `${SARAH_SYSTEM_PROMPT}\n\nIMPORTANT: You are speaking with ${userName}. Use their first name naturally in conversation when appropriate.`
         : SARAH_SYSTEM_PROMPT;
 
       const stream = await openai.chat.completions.create({
         model: "gpt-4o-mini",
-        messages: [
-          { role: "system", content: systemPrompt },
-          ...messages
-        ],
+        messages: [{ role: "system", content: systemPrompt }, ...messages],
         stream: true,
         max_tokens: 200,
       });
@@ -241,9 +243,10 @@ export async function registerRoutes(
       res.end();
     } catch (error: any) {
       console.error("Error in chat:", error);
-      
-      const fallbackMessage = "I am currently recalibrating. Please use the contact form below, or book a call directly: [Book Strategy Session](https://calendly.com/ud-sikder/30min)";
-      
+
+      const fallbackMessage =
+        "I am currently recalibrating. Please use the contact form below, or book a call directly: [Book Strategy Session](https://calendly.com/ud-sikder/30min)";
+
       if (res.headersSent) {
         res.write(`data: ${JSON.stringify({ content: fallbackMessage })}\n\n`);
         res.write(`data: ${JSON.stringify({ done: true })}\n\n`);
@@ -265,56 +268,58 @@ export async function registerRoutes(
       const validated = insertLeadSchema.parse(req.body);
       const isFromChatbot = validated.projectType === "Chat Inquiry";
       const source = isFromChatbot ? "Sarah Agent" : "Contact Form";
-      
+
       // Run DB insert and email sending in parallel
       const results = await Promise.allSettled([
         // Database insert
-        storage.createLead(validated).then(lead => {
-          console.log(`Lead saved to DB: ${validated.email} | Source: ${source}`);
+        storage.createLead(validated).then((lead) => {
+          console.log(
+            `Lead saved to DB: ${validated.email} | Source: ${source}`,
+          );
           return lead;
         }),
         // Email sending (different based on source)
-        isFromChatbot 
+        isFromChatbot
           ? sendSarahSessionEmail(validated.name, validated.email)
           : sendContactFormEmails({
               name: validated.name,
               email: validated.email,
               projectType: validated.projectType,
-              challenge: validated.challenge
-            })
+              challenge: validated.challenge,
+            }),
       ]);
 
       // Check if DB insert succeeded
       const dbResult = results[0];
-      if (dbResult.status === 'rejected') {
+      if (dbResult.status === "rejected") {
         console.error("Failed to save lead to DB:", dbResult.reason);
         throw dbResult.reason;
       }
 
       // Log email status (but don't fail the request if email fails)
       const emailResult = results[1];
-      if (emailResult.status === 'rejected') {
+      if (emailResult.status === "rejected") {
         console.error("Email send failed (non-blocking):", emailResult.reason);
       }
-      
+
       res.status(201).json({
         success: true,
         message: "Lead created successfully",
-        data: dbResult.value
+        data: dbResult.value,
       });
     } catch (error: any) {
       if (error.name === "ZodError") {
         const validationError = fromError(error);
         return res.status(400).json({
           success: false,
-          message: validationError.toString()
+          message: validationError.toString(),
         });
       }
-      
+
       console.error("Error creating lead:", error);
       res.status(500).json({
         success: false,
-        message: "Internal server error"
+        message: "Internal server error",
       });
     }
   });
@@ -325,13 +330,13 @@ export async function registerRoutes(
       const allLeads = await storage.getAllLeads();
       res.json({
         success: true,
-        data: allLeads
+        data: allLeads,
       });
     } catch (error) {
       console.error("Error fetching leads:", error);
       res.status(500).json({
         success: false,
-        message: "Internal server error"
+        message: "Internal server error",
       });
     }
   });

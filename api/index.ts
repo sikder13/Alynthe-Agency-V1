@@ -1,5 +1,5 @@
 // api/index.ts
-import { app, setupApp } from "../server/index";
+import { app, setupApp } from "../server/index.ts";
 
 // Initialize routes once
 const setupPromise = setupApp();
