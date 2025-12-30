@@ -18,7 +18,7 @@ function FAQItem({ question, answer }: { question: string, answer: string }) {
     <div className="border-b border-gray-200 py-6">
       <button 
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center justify-between w-full text-left group"
+        className="flex items-center justify-between w-full text-left group active:scale-[0.98] active:bg-gray-50 transition-all duration-150 rounded-lg -mx-2 px-2 py-1"
       >
         <span className="text-lg md:text-xl font-light text-gray-900 group-hover:text-blue-600 transition-colors">{question}</span>
         <span className="flex-shrink-0 ml-4 p-2 rounded-full border border-gray-200 group-hover:border-blue-600 group-hover:text-blue-600 transition-all">

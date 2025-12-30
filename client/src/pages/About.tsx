@@ -161,13 +161,14 @@ export default function About() {
                 transition={{ duration: 0.6, delay: 0.1 }}
                 className="group"
               >
-                <div className="bg-gradient-to-br from-indigo-100 via-purple-50 to-blue-100 bg-[length:200%_200%] animate-gradient-slow animate-glow-pulse md:animate-none md:bg-neutral-100 md:bg-none aspect-square rounded-lg mb-6 overflow-hidden transition-all duration-500 group-hover:shadow-lg group-hover:bg-neutral-200 relative">
+                <div className="relative aspect-square rounded-lg mb-6 overflow-hidden transition-all duration-500 group-hover:shadow-lg active:scale-[0.98]">
+                  <div className="absolute inset-0 bg-gradient-to-br from-indigo-200 via-purple-100 to-blue-200 animate-pulse md:animate-none md:bg-neutral-100 border border-indigo-300/40 md:border-transparent rounded-lg" />
                   <img
                     src="/team/shadman.webp"
                     alt="Shadman Khan"
                     loading="lazy"
                     decoding="async"
-                    className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-500"
+                    className="relative w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-500"
                   />
                 </div>
                 <div className="space-y-2">
@@ -187,13 +188,14 @@ export default function About() {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="group"
               >
-                <div className="bg-gradient-to-br from-indigo-100 via-purple-50 to-blue-100 bg-[length:200%_200%] animate-gradient-slow animate-glow-pulse md:animate-none md:bg-neutral-100 md:bg-none aspect-square rounded-lg mb-6 overflow-hidden transition-all duration-500 group-hover:shadow-lg group-hover:bg-neutral-200 relative">
+                <div className="relative aspect-square rounded-lg mb-6 overflow-hidden transition-all duration-500 group-hover:shadow-lg active:scale-[0.98]">
+                  <div className="absolute inset-0 bg-gradient-to-br from-indigo-200 via-purple-100 to-blue-200 animate-pulse md:animate-none md:bg-neutral-100 border border-indigo-300/40 md:border-transparent rounded-lg" />
                   <img
                     src="/team/udaay.webp"
                     alt="Udaay Sikder"
                     loading="lazy"
                     decoding="async"
-                    className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-500"
+                    className="relative w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-500"
                   />
                 </div>
                 <div className="space-y-2">

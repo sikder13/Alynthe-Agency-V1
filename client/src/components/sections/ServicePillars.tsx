@@ -20,7 +20,7 @@ export function ServicePillars() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1, duration: 0.6 }}
-                className="group border-t border-gray-200 py-16 flex flex-col md:flex-row md:items-center justify-between cursor-pointer hover:bg-gray-50 transition-colors px-4"
+                className="group border-t border-gray-200 py-16 flex flex-col md:flex-row md:items-center justify-between cursor-pointer hover:bg-gray-50 active:scale-[0.98] active:bg-indigo-50/50 transition-all duration-150 px-4"
               >
                 <div className="flex items-baseline gap-8 md:gap-16">
                   <span className="text-sm font-medium text-gray-400">{pillar.id}</span>
