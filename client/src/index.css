@@ -84,20 +84,26 @@
   .text-balance {
     text-wrap: balance;
   }
+
+  .animate-glow-pulse {
+    animation: glow-pulse 5s ease-in-out infinite;
+  }
+
+  .animate-gradient-slow {
+    background: linear-gradient(135deg, #e0e7ff, #f3e8ff, #dbeafe, #e0e7ff);
+    background-size: 200% 200%;
+    animation: gradient-shift 8s ease infinite;
+  }
 }
 
 /* Mobile-only glow animation for team photos */
 @keyframes glow-pulse {
   0%, 100% {
-    box-shadow: 0 0 20px rgba(99, 102, 241, 0.15), 0 0 40px rgba(139, 92, 246, 0.1);
+    box-shadow: 0 0 20px rgba(79, 70, 229, 0.15);
   }
   50% {
-    box-shadow: 0 0 30px rgba(99, 102, 241, 0.25), 0 0 60px rgba(139, 92, 246, 0.2);
+    box-shadow: 0 0 30px rgba(79, 70, 229, 0.3);
   }
-}
-
-.animate-glow-pulse {
-  animation: glow-pulse 5s ease-in-out infinite;
 }
 
 @keyframes gradient-shift {
@@ -107,10 +113,4 @@
   50% {
     background-position: 100% 50%;
   }
-}
-
-.animate-gradient-slow {
-  background: linear-gradient(135deg, #e0e7ff, #f3e8ff, #dbeafe, #e0e7ff);
-  background-size: 300% 300%;
-  animation: gradient-shift 8s ease infinite;
 }

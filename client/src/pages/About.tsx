@@ -161,7 +161,7 @@ export default function About() {
                 transition={{ duration: 0.6, delay: 0.1 }}
                 className="group"
               >
-                <div className="animate-gradient-slow md:animate-none md:bg-neutral-100 aspect-square rounded-lg mb-6 overflow-hidden transition-all duration-500 group-hover:shadow-lg group-hover:bg-neutral-200 relative animate-glow-pulse md:[animation:none]">
+                <div className="bg-gradient-to-br from-indigo-100 via-purple-50 to-blue-100 bg-[length:200%_200%] animate-gradient-slow animate-glow-pulse md:animate-none md:bg-neutral-100 md:bg-none aspect-square rounded-lg mb-6 overflow-hidden transition-all duration-500 group-hover:shadow-lg group-hover:bg-neutral-200 relative">
                   <img
                     src="/team/shadman.webp"
                     alt="Shadman Khan"
@@ -187,7 +187,7 @@ export default function About() {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="group"
               >
-                <div className="animate-gradient-slow md:animate-none md:bg-neutral-100 aspect-square rounded-lg mb-6 overflow-hidden transition-all duration-500 group-hover:shadow-lg group-hover:bg-neutral-200 relative animate-glow-pulse md:[animation:none]">
+                <div className="bg-gradient-to-br from-indigo-100 via-purple-50 to-blue-100 bg-[length:200%_200%] animate-gradient-slow animate-glow-pulse md:animate-none md:bg-neutral-100 md:bg-none aspect-square rounded-lg mb-6 overflow-hidden transition-all duration-500 group-hover:shadow-lg group-hover:bg-neutral-200 relative">
                   <img
                     src="/team/udaay.webp"
                     alt="Udaay Sikder"
