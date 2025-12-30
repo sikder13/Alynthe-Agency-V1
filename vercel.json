@@ -10,18 +10,15 @@
   ],
   "functions": {
     "api/chat.ts": {
-      "maxDuration": 30
+      "maxDuration": 30,
+      "includeFiles": "shared/**"
     },
     "api/leads.ts": {
-      "maxDuration": 10
+      "maxDuration": 10,
+      "includeFiles": "shared/**"
     },
     "api/index.ts": {
       "includeFiles": "server/**, shared/**"
     }
-  },
-  "env": {
-    "OPENAI_API_KEY": "@openai_api_key",
-    "RESEND_API_KEY": "@resend_api_key",
-    "DATABASE_URL": "@database_url"
   }
 }
