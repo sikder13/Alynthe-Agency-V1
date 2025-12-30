@@ -1,11 +1,27 @@
 {
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist/public",
   "rewrites": [
+    { "source": "/api/chat", "destination": "/api/chat" },
+    { "source": "/api/leads", "destination": "/api/leads" },
+    { "source": "/api/health", "destination": "/api/index" },
     { "source": "/api/(.*)", "destination": "/api/index" },
     { "source": "/(.*)", "destination": "/index.html" }
   ],
   "functions": {
+    "api/chat.ts": {
+      "maxDuration": 30
+    },
+    "api/leads.ts": {
+      "maxDuration": 10
+    },
     "api/index.ts": {
       "includeFiles": "server/**, shared/**"
     }
+  },
+  "env": {
+    "OPENAI_API_KEY": "@openai_api_key",
+    "RESEND_API_KEY": "@resend_api_key",
+    "DATABASE_URL": "@database_url"
   }
 }

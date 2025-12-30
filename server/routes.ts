@@ -161,9 +161,9 @@ async function sendSarahSessionEmail(name: string, email: string) {
   }
 }
 
-// FIX: Point to the correct Vercel Environment Variable
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
+  apiKey: process.env.OPENAI_API_KEY || process.env.AI_INTEGRATIONS_OPENAI_API_KEY,
+  baseURL: process.env.AI_INTEGRATIONS_OPENAI_BASE_URL || undefined,
 });
 
 const CALENDLY_LINK = "https://calendly.com/ud-sikder/30min";
