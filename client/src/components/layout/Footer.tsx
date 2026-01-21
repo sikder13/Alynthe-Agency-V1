@@ -71,8 +71,8 @@ export default function Footer() {
             </div>
             <div className="flex flex-col gap-1">
               <h4 className="text-sm font-bold text-gray-900">Contact Email:</h4>
-              <a href="mailto:alyntheinfo@gmail.com" className="text-base text-gray-500 hover:text-black transition-colors font-light">
-                alyntheinfo@gmail.com
+              <a href="mailto:info@alynthe.com" className="text-base text-gray-500 hover:text-black transition-colors font-light">
+                info@alynthe.com
               </a>
             </div>
             <div className="flex gap-3 mt-2">

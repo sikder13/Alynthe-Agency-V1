@@ -28,7 +28,7 @@ export default function Privacy() {
           </p>
 
           <h2 className="text-2xl font-semibold text-gray-900 mt-8 mb-4">3. Contact Us</h2>
-          <p>If you have questions about this policy, please contact us at alyntheinfo@gmail.com.</p>
+          <p>If you have questions about this policy, please contact us at info@alynthe.com.</p>
         </div>
       </main>
       <Footer />
