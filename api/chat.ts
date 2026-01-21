@@ -1,11 +1,68 @@
+import { sql } from "drizzle-orm";
+import { pgTable, text, varchar, timestamp } from "drizzle-orm/pg-core";
+import { createInsertSchema } from "drizzle-zod";
+import { z } from "zod";
+
+// --- INLINED SCHEMA ---
+export const users = pgTable("users", {
+  id: varchar("id")
+    .primaryKey()
+    .default(sql`gen_random_uuid()`),
+  username: text("username").notNull().unique(),
+  password: text("password").notNull(),
+});
+
+export const insertUserSchema = createInsertSchema(users).pick({
+  username: true,
+  password: true,
+});
+
+export type InsertUser = z.infer<typeof insertUserSchema>;
+export type User = typeof users.$inferSelect;
+
+export const leads = pgTable("leads", {
+  id: varchar("id")
+    .primaryKey()
+    .default(sql`gen_random_uuid()`),
+  name: text("name").notNull(),
+  email: text("email").notNull(),
+  projectType: text("project_type").notNull(),
+  challenge: text("challenge").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const insertLeadSchema = createInsertSchema(leads).omit({
+  id: true,
+  createdAt: true,
+});
+
+export type InsertLead = z.infer<typeof insertLeadSchema>;
+export type Lead = typeof leads.$inferSelect;
+
+export const conversations = pgTable("conversations", {
+  id: varchar("id")
+    .primaryKey()
+    .default(sql`gen_random_uuid()`),
+  title: text("title").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const messages = pgTable("messages", {
+  id: varchar("id")
+    .primaryKey()
+    .default(sql`gen_random_uuid()`),
+  conversationId: varchar("conversation_id").notNull(),
+  role: text("role").notNull(),
+  content: text("content").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export type Conversation = typeof conversations.$inferSelect;
+export type Message = typeof messages.$inferSelect;
+// --- END SCHEMA ---
+
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import OpenAI from "openai";
-
-const openai = new OpenAI({
-  apiKey:
-    process.env.OPENAI_API_KEY || process.env.AI_INTEGRATIONS_OPENAI_API_KEY,
-  baseURL: process.env.AI_INTEGRATIONS_OPENAI_BASE_URL || undefined,
-});
 
 const CALENDLY_LINK = "https://calendly.com/ud-sikder/30min";
 
@@ -39,6 +96,15 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
+    // 1. Check for Brain (API Key)
+    const apiKey = process.env.OPENAI_API_KEY;
+    if (!apiKey) {
+      throw new Error(
+        "CRITICAL: OPENAI_API_KEY is missing in Vercel Environment Variables.",
+      );
+    }
+
+    const openai = new OpenAI({ apiKey: apiKey });
     const { messages, userName } = req.body;
 
     if (!messages || !Array.isArray(messages)) {
@@ -53,6 +119,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       ? `${SARAH_SYSTEM_PROMPT}\n\nIMPORTANT: You are speaking with ${userName}. Use their first name naturally in conversation when appropriate.`
       : SARAH_SYSTEM_PROMPT;
 
+    // 2. Attempt Connection
     const stream = await openai.chat.completions.create({
       model: "gpt-4o-mini",
       messages: [{ role: "system", content: systemPrompt }, ...messages],
@@ -70,23 +137,23 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     res.write(`data: ${JSON.stringify({ done: true })}\n\n`);
     res.end();
   } catch (error: any) {
-    console.error("Error in chat:", error);
+    // 3. LOUD ERROR LOGGING
+    console.error("❌ SARAH BRAIN FAILURE ❌");
+    console.error(error); // This will show in Vercel Logs
+    console.error("Message:", error.message);
 
+    // 4. Fallback Message (Updated Text)
     const fallbackMessage =
-      "I am currently recalibrating. Please use the contact form below, or book a call directly: [Book Strategy Session](https://calendly.com/ud-sikder/30min)";
+      "I am currently recalibrating. Please use the contact form below, or book a free consultation directly: [Book Free Consultation](https://calendly.com/ud-sikder/30min)";
 
-    if (res.headersSent) {
-      res.write(`data: ${JSON.stringify({ content: fallbackMessage })}\n\n`);
-      res.write(`data: ${JSON.stringify({ done: true })}\n\n`);
-      res.end();
-    } else {
+    if (!res.headersSent) {
       res.setHeader("Content-Type", "text/event-stream");
       res.setHeader("Cache-Control", "no-cache");
       res.setHeader("Connection", "keep-alive");
-      res.write(`data: ${JSON.stringify({ content: fallbackMessage })}\n\n`);
-      res.write(`data: ${JSON.stringify({ done: true })}\n\n`);
-      res.end();
     }
+
+    res.write(`data: ${JSON.stringify({ content: fallbackMessage })}\n\n`);
+    res.write(`data: ${JSON.stringify({ done: true })}\n\n`);
+    res.end();
   }
 }
-//FORCE UPDATE: Vercel Persona Fix.

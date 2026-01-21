@@ -261,7 +261,10 @@ export default function Contact() {
                       />
                     </div>
                   </div>
-
+                  <p className="text-xs text-gray-500 mt-4 mb-2">
+                    By entering your phone number, you agree to receive text messages from Alynthe. 
+                    Message & data rates may apply. Reply STOP to opt-out.
+                  </p>
                   <button
                     type="submit"
                     disabled={isSubmitting}

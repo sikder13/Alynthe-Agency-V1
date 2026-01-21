@@ -1,8 +1,69 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { Resend } from "resend";
-import { drizzle } from "drizzle-orm/neon-http";
-import { neon } from "@neondatabase/serverless";
-import { leads, insertLeadSchema } from "../shared/schema";
+import { drizzle } from "drizzle-orm/neon-serverless";
+import { Pool } from "@neondatabase/serverless";
+import { sql } from "drizzle-orm";
+import { pgTable, text, varchar, timestamp } from "drizzle-orm/pg-core";
+import { createInsertSchema } from "drizzle-zod";
+import { z } from "zod";
+
+// --- INLINED SCHEMA (DO NOT REMOVE) ---
+export const users = pgTable("users", {
+  id: varchar("id")
+    .primaryKey()
+    .default(sql`gen_random_uuid()`),
+  username: text("username").notNull().unique(),
+  password: text("password").notNull(),
+});
+
+export const insertUserSchema = createInsertSchema(users).pick({
+  username: true,
+  password: true,
+});
+
+export type InsertUser = z.infer<typeof insertUserSchema>;
+export type User = typeof users.$inferSelect;
+
+export const leads = pgTable("leads", {
+  id: varchar("id")
+    .primaryKey()
+    .default(sql`gen_random_uuid()`),
+  name: text("name").notNull(),
+  email: text("email").notNull(),
+  projectType: text("project_type").notNull(),
+  challenge: text("challenge").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const insertLeadSchema = createInsertSchema(leads).omit({
+  id: true,
+  createdAt: true,
+});
+
+export type InsertLead = z.infer<typeof insertLeadSchema>;
+export type Lead = typeof leads.$inferSelect;
+
+export const conversations = pgTable("conversations", {
+  id: varchar("id")
+    .primaryKey()
+    .default(sql`gen_random_uuid()`),
+  title: text("title").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const messages = pgTable("messages", {
+  id: varchar("id")
+    .primaryKey()
+    .default(sql`gen_random_uuid()`),
+  conversationId: varchar("conversation_id").notNull(),
+  role: text("role").notNull(),
+  content: text("content").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export type Conversation = typeof conversations.$inferSelect;
+export type Message = typeof messages.$inferSelect;
+// --- END SCHEMA ---
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -145,15 +206,19 @@ async function sendSarahSessionEmail(name: string, email: string) {
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
+  // Use Pool connection to avoid HTTP Driver conflicts
+  const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+  const db = drizzle(pool);
+
   if (req.method === "GET") {
     try {
-      const sql = neon(process.env.DATABASE_URL!);
-      const db = drizzle(sql);
       const allLeads = await db.select().from(leads);
       return res.status(200).json({ success: true, data: allLeads });
     } catch (error) {
       console.error("Error fetching leads:", error);
-      return res.status(500).json({ success: false, message: "Internal server error" });
+      return res
+        .status(500)
+        .json({ success: false, message: "Internal server error" });
     }
   }
 
@@ -165,11 +230,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const validated = insertLeadSchema.parse(req.body);
     const isFromChatbot = validated.projectType === "Chat Inquiry";
 
-    const sql = neon(process.env.DATABASE_URL!);
-    const db = drizzle(sql);
-
     const [newLead] = await db.insert(leads).values(validated).returning();
-    console.log(`Lead saved: ${validated.email} | Source: ${isFromChatbot ? "Sarah Agent" : "Contact Form"}`);
+    console.log(
+      `Lead saved: ${validated.email} | Source: ${isFromChatbot ? "Sarah Agent" : "Contact Form"}`,
+    );
 
     if (isFromChatbot) {
       await sendSarahSessionEmail(validated.name, validated.email);

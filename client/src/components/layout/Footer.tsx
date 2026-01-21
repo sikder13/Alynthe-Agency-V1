@@ -17,6 +17,7 @@ export default function Footer() {
     { name: "Use Cases", href: "/use-cases" },
     { name: "Blog", href: "/blog" },
     { name: "Contact", href: "/contact" },
+    { name: "Privacy Policy", href: "/privacy" }, // <--- Add this line
   ];
 
   return (

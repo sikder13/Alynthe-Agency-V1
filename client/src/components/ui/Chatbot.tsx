@@ -287,7 +287,10 @@ export function Chatbot() {
                     {leadError && (
                       <p className="text-red-500 text-xs text-center">{leadError}</p>
                     )}
-
+                    <p className="text-[10px] text-gray-400 mb-3 text-center leading-tight">
+                      By entering your phone number, you agree to receive text messages from Alynthe. 
+                      Reply STOP to opt-out.
+                    </p>
                     <button
                       type="submit"
                       disabled={isSubmittingLead}
