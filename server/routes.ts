@@ -10,7 +10,7 @@ import { Resend } from "resend";
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 const EMAIL_FROM = "Alynthe AI <no-reply@alynthe.com>";
-const ADMIN_EMAIL = "alyntheinfo@gmail.com";
+const ADMIN_EMAIL = "info@alynthe.com";
 const REPLY_TO = "info@alynthe.com";
 
 const emailFooter = `
