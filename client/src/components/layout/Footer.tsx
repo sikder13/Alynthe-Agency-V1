@@ -76,7 +76,7 @@ export default function Footer() {
               </a>
             </div>
             <div className="flex gap-3 mt-2">
-               <a href="#" className="p-2 border border-gray-200 rounded-full hover:bg-black hover:text-white hover:border-black transition-all">
+               <a href="https://www.facebook.com/profile.php?id=61585784430713" target="_blank" rel="noopener noreferrer" className="p-2 border border-gray-200 rounded-full hover:bg-black hover:text-white hover:border-black transition-all">
                  <Facebook className="w-4 h-4" />
                </a>
                <a href="#" className="p-2 border border-gray-200 rounded-full hover:bg-black hover:text-white hover:border-black transition-all">
