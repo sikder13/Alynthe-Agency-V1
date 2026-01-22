@@ -16,18 +16,31 @@ export default function Contact() {
   });
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [formData, setFormData] = useState({
+
+  // FIXED: Explicitly typed state to handle both strings and booleans
+  const [formData, setFormData] = useState<{
+    name: string;
+    email: string;
+    projectType: string;
+    challenge: string;
+    consent: boolean;
+  }>({
     name: "",
     email: "",
     projectType: "",
-    challenge: ""
+    challenge: "",
+    consent: false // Default to unchecked
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
+    const { name, value, type } = e.target;
+
+    // FIXED: Type-safe check for checkbox
+    const finalValue = type === 'checkbox' ? (e.target as HTMLInputElement).checked : value;
+
     setFormData(prev => ({
       ...prev,
-      [name]: value
+      [name]: finalValue
     }));
   };
 
@@ -57,7 +70,8 @@ export default function Contact() {
           name: "",
           email: "",
           projectType: "",
-          challenge: ""
+          challenge: "",
+          consent: false
         });
       } else {
         toast({
@@ -90,10 +104,10 @@ export default function Contact() {
 
       <div className="relative z-10 flex flex-col min-h-screen">
         <Navbar />
-        
+
         <main className="flex-grow pt-32 pb-24 px-6 md:px-12 container mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
-            
+
             {/* Left Column: Trust Signals */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
@@ -106,7 +120,7 @@ export default function Contact() {
                   Start the <br />
                   <span className="font-medium">Transformation.</span>
                 </h1>
-                
+
                 <p className="text-xl text-gray-500 font-light leading-relaxed mb-16 max-w-lg border-l-2 border-indigo-500 pl-6">
                   We don't do "discovery calls" to waste time. We do "strategy sessions" to solve problems.
                 </p>
@@ -130,8 +144,8 @@ export default function Contact() {
                     </div>
                     <div>
                       <p className="text-sm uppercase tracking-wider text-gray-400 font-medium mb-1">Phone</p>
-                      <a href="tel:+19293508374" className="text-lg text-gray-900 hover:text-indigo-600 transition-colors">
-                        +1 929 350 8374
+                      <a href="tel:+13175550123" className="text-lg text-gray-900 hover:text-indigo-600 transition-colors">
+                        +1 (317) 555-0123
                       </a>
                     </div>
                   </div>
@@ -261,10 +275,25 @@ export default function Contact() {
                       />
                     </div>
                   </div>
-                  <p className="text-xs text-gray-500 mt-4 mb-2">
-                    By entering your phone number, you agree to receive text messages from Alynthe. 
-                    Message & data rates may apply. Reply STOP to opt-out.
-                  </p>
+
+                  {/* A2P 10DLC Compliance Checkbox - REQUIRED for Carrier Approval */}
+                  <div className="flex items-start space-x-3 pt-4 mb-6">
+                    <div className="flex items-center h-5">
+                      <input
+                        id="consent"
+                        name="consent"
+                        type="checkbox"
+                        required
+                        checked={formData.consent}
+                        onChange={handleChange}
+                        className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-indigo-300"
+                      />
+                    </div>
+                    <label htmlFor="consent" className="text-xs text-gray-500 leading-tight">
+                      I agree to receive SMS from Alynthe LLC. Message frequency varies. Text HELP for help, STOP to unsubscribe. Privacy Policy: <a href="/privacy" className="text-indigo-600 hover:underline">https://alynthe.com/privacy</a>
+                    </label>
+                  </div>
+
                   <button
                     type="submit"
                     disabled={isSubmitting}
@@ -287,7 +316,7 @@ export default function Contact() {
             </motion.div>
           </div>
         </main>
-        
+
         <Footer />
         <Chatbot />
       </div>
