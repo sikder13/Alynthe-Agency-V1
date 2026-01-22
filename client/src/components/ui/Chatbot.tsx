@@ -11,6 +11,7 @@ type LeadData = {
   name: string;
   email: string;
   phone: string;
+  consent: boolean;
 };
 
 function parseMessageContent(text: string): React.ReactNode {
@@ -24,11 +25,11 @@ function parseMessageContent(text: string): React.ReactNode {
     if (match.index > lastIndex) {
       parts.push(text.slice(lastIndex, match.index));
     }
-    
+
     const linkText = match[1];
     const url = match[2];
     const isBookingLink = url.includes('calendly.com');
-    
+
     parts.push(
       <a
         key={match.index}
@@ -60,7 +61,15 @@ export function Chatbot() {
   const [isGated, setIsGated] = useState(true);
   const [isSubmittingLead, setIsSubmittingLead] = useState(false);
   const [leadError, setLeadError] = useState("");
-  const [leadData, setLeadData] = useState<LeadData>({ name: "", email: "", phone: "" });
+
+  // UPDATED: State now includes consent
+  const [leadData, setLeadData] = useState<LeadData>({ 
+    name: "", 
+    email: "", 
+    phone: "", 
+    consent: false 
+  });
+
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputText, setInputText] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -86,6 +95,13 @@ export function Chatbot() {
   const handleLeadSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLeadError("");
+
+    // Safety check (redundant due to 'required' attribute, but good for logic)
+    if (!leadData.consent) {
+      setLeadError("Please accept the terms to continue.");
+      return;
+    }
+
     setIsSubmittingLead(true);
 
     try {
@@ -172,6 +188,7 @@ export function Chatbot() {
                 });
               }
             } catch {
+              // Ignore parse errors from partial chunks
             }
           }
         }
@@ -196,7 +213,7 @@ export function Chatbot() {
 
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-4">
-      
+
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -229,7 +246,7 @@ export function Chatbot() {
               <div className="relative">
                 {/* Glassmorphism background */}
                 <div className="absolute inset-0 bg-gradient-to-br from-indigo-50/80 via-white/60 to-purple-50/80 backdrop-blur-sm" />
-                
+
                 <div className="relative p-6">
                   <div className="text-center mb-6">
                     <h3 className="text-lg font-medium text-gray-900 mb-1">Start a Conversation</h3>
@@ -287,10 +304,24 @@ export function Chatbot() {
                     {leadError && (
                       <p className="text-red-500 text-xs text-center">{leadError}</p>
                     )}
-                    <p className="text-[10px] text-gray-400 mb-3 text-center leading-tight">
-                      By entering your phone number, you agree to receive text messages from Alynthe. 
-                      Reply STOP to opt-out.
-                    </p>
+
+                    {/* A2P Compliance Checkbox - REQUIRED for Carrier Approval */}
+                    <div className="flex items-start space-x-2 pt-1">
+                      <div className="flex items-center h-5">
+                        <input
+                          id="chat-consent"
+                          required
+                          type="checkbox"
+                          checked={leadData.consent}
+                          onChange={(e) => setLeadData(prev => ({ ...prev, consent: e.target.checked }))}
+                          className="w-3.5 h-3.5 border border-gray-300 rounded bg-white focus:ring-2 focus:ring-black/10 text-black cursor-pointer"
+                        />
+                      </div>
+                      <label htmlFor="chat-consent" className="text-[10px] text-gray-500 leading-tight">
+                        I agree to receive SMS from Alynthe LLC. Msg freq varies. Reply STOP to opt-out. View <a href="/terms" target="_blank" className="underline text-gray-700 hover:text-black">Terms</a> & <a href="/privacy" target="_blank" className="underline text-gray-700 hover:text-black">Privacy</a>.
+                      </label>
+                    </div>
+
                     <button
                       type="submit"
                       disabled={isSubmittingLead}
