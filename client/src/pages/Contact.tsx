@@ -290,7 +290,7 @@ export default function Contact() {
                       />
                     </div>
                     <label htmlFor="consent" className="text-xs text-gray-500 leading-tight">
-                      I agree to receive SMS from Alynthe LLC. Message frequency varies. Text HELP for help, STOP to unsubscribe. Privacy Policy: <a href="/privacy" className="text-indigo-600 hover:underline">https://alynthe.com/privacy</a>
+                      I agree to receive SMS from Alynthe LLC. Message frequency varies. Text HELP for help, STOP to unsubscribe. View <a href="/terms" className="text-indigo-600 hover:underline">Terms</a> & <a href="/privacy" className="text-indigo-600 hover:underline">Privacy Policy</a>.
                     </label>
                   </div>
 

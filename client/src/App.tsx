@@ -9,6 +9,7 @@ import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 
 const Home = lazy(() => import("@/pages/Home"));
 const Privacy = lazy(() => import("@/pages/Privacy"));
+const Terms = lazy(() => import("@/pages/Terms"));
 const Services = lazy(() => import("@/pages/Services"));
 const UseCases = lazy(() => import("@/pages/UseCases"));
 const About = lazy(() => import("@/pages/About"));
@@ -33,6 +34,7 @@ function Router() {
         <Route path="/blog/sales-engine-blueprint" component={SalesEngineBlueprint} />
         <Route path="/blog/roi-of-silence" component={ROISilence} />
         <Route path="/privacy" component={Privacy} />
+        <Route path="/terms" component={Terms} />
         <Route component={NotFound} />
       </Switch>
     </Suspense>
