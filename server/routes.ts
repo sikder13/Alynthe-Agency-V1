@@ -268,6 +268,7 @@ export async function registerRoutes(
           return lead;
         }),
         // Email sending (different based on source)
+        // redeploy check maybe
         isFromChatbot
           ? sendSarahSessionEmail(validated.name, validated.email)
           : sendContactFormEmails({
