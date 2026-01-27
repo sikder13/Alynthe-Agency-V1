@@ -21,6 +21,7 @@ export const leads = pgTable("leads", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
   name: text("name").notNull(),
   email: text("email").notNull(),
+  phone: text("phone"), // <--- ADDING THIS LINE FIXES THE ISSUE
   projectType: text("project_type").notNull(),
   challenge: text("challenge").notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),

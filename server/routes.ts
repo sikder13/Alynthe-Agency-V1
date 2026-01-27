@@ -25,6 +25,7 @@ const emailFooter = `
 async function sendContactFormEmails(lead: {
   name: string;
   email: string;
+  phone?: string; //added this later for tradeslanding offers
   projectType?: string;
   challenge?: string;
 }) {
@@ -66,24 +67,24 @@ async function sendContactFormEmails(lead: {
   `;
 
   const adminEmailHtml = `
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-</head>
-<body style="margin: 0; padding: 20px; font-family: monospace; background-color: #111; color: #0f0;">
-  <h2 style="color: #0f0; margin-bottom: 20px;">NEW LEAD CAPTURED</h2>
-  <pre style="background: #222; padding: 20px; border-radius: 4px; overflow-x: auto;">
-Name: ${lead.name}
-Email: ${lead.email}
-Project Type: ${lead.projectType || "Not specified"}
-Challenge: ${lead.challenge || "Not specified"}
-Source: Contact Form
-Timestamp: ${new Date().toISOString()}
-  </pre>
-</body>
-</html>
-  `;
+  <!DOCTYPE html>
+  <html>
+  <head>
+    <meta charset="utf-8">
+  </head>
+  <body style="margin: 0; padding: 20px; font-family: monospace; background-color: #111; color: #0f0;">
+    <h2 style="color: #0f0; margin-bottom: 20px;">NEW LEAD CAPTURED</h2>
+    <pre style="background: #222; padding: 20px; border-radius: 4px; overflow-x: auto;">
+  Name: ${lead.name}
+  Email: ${lead.email}
+  Phone: ${lead.phone || "Not provided"}  Project Type: ${lead.projectType || "Not specified"}
+  Challenge: ${lead.challenge || "Not specified"}
+  Source: Contact Form
+  Timestamp: ${new Date().toISOString()}
+    </pre>
+  </body>
+  </html>
+    `;
 
   const results = await Promise.allSettled([
     resend.emails.send({
@@ -166,7 +167,7 @@ const openai = new OpenAI({
   baseURL: process.env.AI_INTEGRATIONS_OPENAI_BASE_URL || undefined,
 });
 
-const CALENDLY_LINK = "https://calendly.com/ud-sikder/30min";
+const CALENDLY_LINK = "https://calendly.com/alynthe-info/30min";
 
 const SARAH_SYSTEM_PROMPT = `You are Sarah, an Associate at Alynthe, a digital agency in Indianapolis.
 
@@ -272,6 +273,7 @@ export async function registerRoutes(
           : sendContactFormEmails({
               name: validated.name,
               email: validated.email,
+              phone: validated.phone || undefined, // <--- ADD THIS LINE for tradeslanding ad.
               projectType: validated.projectType,
               challenge: validated.challenge,
             }),
