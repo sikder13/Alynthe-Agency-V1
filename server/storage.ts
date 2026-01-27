@@ -43,9 +43,10 @@ export class DatabaseStorage implements IStorage {
     return result[0];
   }
 
+  // ... inside your DatabaseStorage class
   async createLead(insertLead: InsertLead): Promise<Lead> {
-    const result = await db.insert(leads).values(insertLead).returning();
-    return result[0];
+    const [lead] = await db.insert(leads).values(insertLead).returning();
+    return lead;
   }
 
   async getAllLeads(): Promise<Lead[]> {
